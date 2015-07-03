@@ -85,7 +85,9 @@ public class GetCliente extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			clienteRepository = new ClienteRepository();
-			clientes = (request.getAttribute("ClientesAgregados")== null) ? new ArrayList<Cliente>() : (ArrayList<Cliente>)request.getAttribute("ClientesAgregados");
+			if(clientes == null)clientes=   new ArrayList<Cliente>();
+					
+//					(request.getAttribute("ClientesAgregados")== null) ? new ArrayList<Cliente>() : (ArrayList<Cliente>)request.getAttribute("ClientesAgregados");
 			Integer idCliente = Integer.parseInt(request.getParameter("idCliente"));
 			Cliente cliente = clienteRepository.GetByIdBase(idCliente);
 

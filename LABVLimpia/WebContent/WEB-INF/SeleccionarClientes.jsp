@@ -18,9 +18,8 @@
 		
 		$('#tablaClientes').click(function() { // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
 		// 			$.get('GetPaquete', function(responseText) { // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
-		// 				$('#detallePaquete').text(responseText); // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
+		// 				$('#detallePaquete').text(responseText); // Locate HTML DOM element with ID "somediv" and set its text content with the response text.	
 			$.ajax({
-
 				type : "GET",
 				url : 'GetCliente',
 				async : false,
@@ -43,7 +42,8 @@
 								idCliente : $('#idCliente').val()
 							},
 							success : function(responseJson) {
-								 var $table = $('<table>').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
+								$('.delete').remove();
+								 var $table = $('<table class="delete">').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
 						            $.each(responseJson, function(index, cliente) {    // Iterate over the JSON array.
 						                $('<tr>').appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
 						                    .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
