@@ -1,0 +1,33 @@
+body,html{
+	border:0;
+	padding: 0;
+	margin: 0;
+}
+
+/*	HEADER	*/
+header{
+	
+}
+.menu{
+	list-style: none;
+	background: #4f67f9;
+}
+.menu li{
+	display:inline-block;
+	padding: 10px;
+}
+.menu li a{
+	text-decoration: none;
+	color: white;
+	font-family: "Helvetica","Open Sans","arial";
+	cursor: pointer;
+	
+}
+.menu li a:hover{
+	color:black;
+}
+/*	Fin Menu 	*/
+.contenedor{
+	padding-left: 15px;
+  	padding-right: 15px;
+}
