@@ -3,7 +3,7 @@
 	<name>LABVLimpia</name>
 	<comment></comment>
 	<projects>
-		<project>DAO</project>
+		<project>FINAL_DAO</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

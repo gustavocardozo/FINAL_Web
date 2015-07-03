@@ -9,11 +9,8 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="mysql-connector-java-5.1.29-bin.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DAO">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="DAO"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="C:/xampp/tomcat/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.3.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/FINAL_DAO"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
