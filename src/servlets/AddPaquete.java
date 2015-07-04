@@ -13,6 +13,7 @@ import model.Paquete;
 import model.Reserva;
 import repository.ClienteRepository;
 import repository.PaqueteRepository;
+import repository.ReservaRepository;
 
 public class AddPaquete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -51,11 +52,13 @@ public class AddPaquete extends HttpServlet {
 		Integer idPaquete = Integer.parseInt(request.getParameter("idPaquete"));
 		Reserva reserva = new Reserva();
 		PaqueteRepository paqueteRepository = new PaqueteRepository();
+		ReservaRepository reservaRepository = new ReservaRepository();
 		
+		reserva.setId(reservaRepository.GetIdBase());
 		reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
 		
-		request.setAttribute("reserva", reserva);
-		request.setAttribute("GET", true);
+		request.getSession().setAttribute("reserva", reserva);
+		request.getSession().setAttribute("GET",true);
 		
 		request.getRequestDispatcher("/SeleccionarClientes").forward(request, response);
 		

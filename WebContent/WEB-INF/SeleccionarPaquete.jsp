@@ -13,7 +13,7 @@
 		// When the HTML DOM is ready loading, then execute the following function...
 		 $('table tbody tr td').click(function(){
 	        $('#idPaquete').val($(this).attr('id'));
-			 alert($(this).attr('id'));
+// 			 alert($(this).attr('id'));
 	    });
 		$('#tablaPaquetes').click(function() { // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
 // 			$.get('GetPaquete', function(responseText) { // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
@@ -42,7 +42,7 @@
 	</div>
 	<ul class="menu">
 		<li><a href="Index">Home</a></li>
-		<li><a href="AgregarReserva">Agregar reserva</a></li>
+		<li><a href="SeleccionarPaquete">Agregar reserva</a></li>
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
 	<div id="seleccionPaquete">

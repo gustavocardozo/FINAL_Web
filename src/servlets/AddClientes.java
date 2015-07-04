@@ -27,7 +27,7 @@ public class AddClientes extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			
+			request.getSession().setAttribute("clientesAgregados", null);
 			clienteRepository = new ClienteRepository();
 			reserva = (Reserva)request.getAttribute("reserva");
 			clientes = clienteRepository.ListadoBase();
@@ -46,12 +46,18 @@ public class AddClientes extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			
-			Boolean doGet = (Boolean)request.getAttribute("GET");
+			Boolean doGet = (Boolean)request.getSession().getAttribute("GET");
 			
 			if (doGet) {
-				request.setAttribute("GET", false);
+				request.getSession().setAttribute("GET", false);
 				doGet(request,response);
 			}
+			else
+			{
+				request.getRequestDispatcher("AgregarReserva").forward(request, response);
+			}
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -33,6 +34,7 @@ public class GetCliente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			
 			clienteRepository = new ClienteRepository();
 			Integer idCliente = Integer.parseInt(request.getParameter("idCliente"));
 			Cliente cliente = clienteRepository.GetByIdBase(idCliente);
@@ -68,7 +70,9 @@ public class GetCliente extends HttpServlet {
 			detalleCliente.append("</p>");
 			detalleCliente.append("<br>");
 			detalleCliente.append("<button type=\"button\" id=\"agregar\">Agregar</button>");
-
+			
+			
+			
 			response.setContentType("text/html");
 			response.getWriter().write(detalleCliente.toString());
 
@@ -85,6 +89,9 @@ public class GetCliente extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			clienteRepository = new ClienteRepository();
+			HttpSession session = request.getSession();
+			clientes = (ArrayList<Cliente>)session.getAttribute("clientesAgregados");
+			
 			if(clientes == null)clientes=   new ArrayList<Cliente>();
 					
 //					(request.getAttribute("ClientesAgregados")== null) ? new ArrayList<Cliente>() : (ArrayList<Cliente>)request.getAttribute("ClientesAgregados");
@@ -93,7 +100,7 @@ public class GetCliente extends HttpServlet {
 
 			clientes.add(cliente);
 
-			request.setAttribute("ClientesAgregados", clientes);
+			session.setAttribute("clientesAgregados", clientes);
 			
 			String listadoCliente = new Gson().toJson(clientes);
 			response.setContentType("application/json");

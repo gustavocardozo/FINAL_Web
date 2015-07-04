@@ -13,7 +13,7 @@
 		// When the HTML DOM is ready loading, then execute the following function...
 		$('table tbody tr td').click(function() {
 			$('#idCliente').val($(this).attr('id'));
-			alert($(this).attr('id'));
+// 			alert($(this).attr('id'));
 		});
 		
 		$('#tablaClientes').click(function() { // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
@@ -48,7 +48,7 @@
 						                $('<tr>').appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
 						                    .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
 						                    .append($('<td>').text(cliente.apellido))      // Create HTML <td> element, set its text content with name of currently iterated product and append it to the <tr>.
-						                    .append($('<td>').text(cliente.dni));    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
+						                    .append($('<td>').text(cliente.dni))    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
 						            });
 							}
 						});
@@ -66,7 +66,7 @@
 	</div>
 	<ul class="menu">
 		<li><a href="Index">Home</a></li>
-		<li><a href="AgregarReserva">Agregar reserva</a></li>
+		<li><a href="SeleccionarPaquete">Agregar reserva</a></li>
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
 	<div id="Clientes">
@@ -92,7 +92,7 @@
 	
 	
 	<div id="seleccionCliente">
-		<form action="SeleccionarCliente" method="post">
+		<form action="SeleccionarClientes" method="post">
 			<h2>Clientes</h2>
 			<div id="clientesSeleccionados">
 			</div>
