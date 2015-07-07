@@ -42,7 +42,7 @@
 	</div>
 	<ul class="menu">
 		<li><a href="Index">Home</a></li>
-		<li><a href="SeleccionarPaquete">Agregar reserva</a></li>
+		<li><a href="SeleccionarDestinos">Agregar reserva</a></li>
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
 	<div id="seleccionPaquete">

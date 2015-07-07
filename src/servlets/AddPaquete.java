@@ -36,7 +36,7 @@ public class AddPaquete extends HttpServlet {
 		try {
 			VueloRepository vueloRepository = new VueloRepository();
 			PaqueteRepository paqueteRepository = new PaqueteRepository();
-			String where = "WHERE DESDE=" + request.getAttribute("origen") + " AND HACIA" + request.getAttribute("destino"); 
+			String where = "WHERE DESDE=" + request.getParameter("origen") + " AND HACIA= " + request.getParameter("destino"); 
 			
 			ArrayList<Vuelo> vuelos = vueloRepository.VuelosBy(where);
 			ArrayList<Paquete> paquetes = paqueteRepository.PaquetesBy(where);

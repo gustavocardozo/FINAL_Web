@@ -42,7 +42,8 @@
 								idCliente : $('#idCliente').val(),
 								accion: "add"
 							},
-							success : function(responseJson) {
+							success :
+								function(responseJson) {
 								$('.delete').remove();
 								 var $table = $('<table class="delete">').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
 						            $.each(responseJson, function(index, cliente) {    // Iterate over the JSON array.
@@ -50,41 +51,31 @@
 						                    .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
 						                    .append($('<td>').text(cliente.apellido))      // Create HTML <td> element, set its text content with name of currently iterated product and append it to the <tr>.
 						                    .append($('<td>').text(cliente.dni))    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
-						                    .append($('<td>').text("<button type=\"button\" id=\"eliminar\" value=\"" + cliente.id +"\">Eliminar</button>"))
+						                    $('<input></input>').attr({'type': 'button'}).attr({'id':'eliminar'}).val(cliente.id).click(function(){
+						                    }).appendTo($('td.toinsert'));
 						            });
 							}
 						});
-						 $('#eliminar').click(function() {
-		                    	$.ajax({
-		            				
-									type : "POST",
-									url : 'GetCliente',
-									async : false,
-									dataType : "json",
-									cache : false,
-									data : {
-										idCliente : $(this).attr('value'),
-										accion: "delete"
-									},
-									success : function(responseJson) {
-										$('.delete').remove();
-										 var $table = $('<table class="delete">').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
-								            $.each(responseJson, function(index, cliente) {    // Iterate over the JSON array.
-								                $('<tr>').appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
-								                    .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
-								                    .append($('<td>').text(cliente.apellido))      // Create HTML <td> element, set its text content with name of currently iterated product and append it to the <tr>.
-								                    .append($('<td>').text(cliente.dni))    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
-								                    .append($('<td>').text("<button type=\"button\" id=\"eliminar\" value=\"" + cliente.id +"\">Eliminar</button>"))
-								            });
-									}
-									});
-		                    });
 					});
 				}
 			});
 		});
 		
 	});
+		
+		
+		
+// function CargarGrilla(responseJson) {
+// 		$('.delete').remove();
+// 		 var $table = $('<table class="delete">').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
+//             $.each(responseJson, function(index, cliente) {    // Iterate over the JSON array.
+//                 $('<tr>').appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
+//                     .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
+//                     .append($('<td>').text(cliente.apellido))      // Create HTML <td> element, set its text content with name of currently iterated product and append it to the <tr>.
+//                     .append($('<td>').text(cliente.dni))    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
+//                     .append($('<td class="toAppend">'))
+//             });
+// 	}
 </script>
 </head>
 <body>
@@ -93,40 +84,39 @@
 	</div>
 	<ul class="menu">
 		<li><a href="Index">Home</a></li>
-		<li><a href="SeleccionarPaquete">Agregar reserva</a></li>
+		<li><a href="SeleccionarDestinos">Agregar reserva</a></li>
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
 	<div id="Clientes">
-			<h2>Clientes</h2>
-			<table id="tablaClientes">
-				<thead>
-					<tr>
-						<td>Nombre</td>
-					</tr>
-				</thead>
-				<tbody>
+		<h2>Clientes</h2>
+		<table id="tablaClientes">
+			<thead>
+				<tr>
+					<td>Nombre</td>
+				</tr>
+			</thead>
+			<tbody>
 
-					<c:forEach items="${clientes}" var="cliente">
-						<tr>
-							<td id="${cliente.id}">${cliente.nombre}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<input type="hidden" id="idCliente" name="idCliente" value="">
+				<c:forEach items="${clientes}" var="cliente">
+					<tr>
+						<td id="${cliente.id}">${cliente.nombre}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<input type="hidden" id="idCliente" name="idCliente" value="">
 	</div>
 	<div id="detalleCliente"></div>
-	
-	
+
+
 	<div id="seleccionCliente">
 		<form action="SeleccionarClientes" method="post">
 			<h2>Clientes</h2>
-			<div id="clientesSeleccionados">
-			</div>
+			<div id="clientesSeleccionados"></div>
 			<input type="submit" name="siguiente" value="Siguiente">
 		</form>
 	</div>
-	
+
 
 
 </body>

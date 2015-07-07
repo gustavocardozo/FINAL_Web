@@ -87,4 +87,12 @@
 		<servlet-name>GetCliente</servlet-name>
 		<url-pattern>/GetCliente</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>SeleccionarDestinos</servlet-name>
+		<servlet-class>servlets.SeleccionarDestinos</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SeleccionarDestinos</servlet-name>
+		<url-pattern>/SeleccionarDestinos</url-pattern>
+	</servlet-mapping>
 </web-app>

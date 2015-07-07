@@ -98,7 +98,7 @@ public class GetCliente extends HttpServlet {
 			Integer idCliente = Integer.parseInt(request.getParameter("idCliente"));
 			Cliente cliente = clienteRepository.GetByIdBase(idCliente);
 
-			String accion = request.getAttribute("accion").toString();
+			String accion = request.getParameter("accion").toString();
 			switch (accion) {
 			case "add":
 				clientes.add(cliente);	

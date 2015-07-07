@@ -10,12 +10,20 @@
 <script>
 	$(document).ready(function() {
 		// When the HTML DOM is ready loading, then execute the following function...
-		$('#selectOrigen').click(function() {
-			$('#origen').val($(this).attr('id'));
-		});
-		$('#selectDestino').click(function() {
-			$('#destino').val($(this).attr('id'));
-		});
+// 		$('#selectOrigen').click(function() {
+// 			$('#origen').val($(this).val());
+// 		});
+// 		$('#selectDestino').click(function() {
+// 			$('#destino').val($(this).val());
+// 		});
+		
+		$("#selectOrigen").change(function() {
+			$('#origen').val($(this).children(":selected").attr("id"));
+			});
+		$("#selectDestino").change(function() {
+			$('#destino').val($(this).children(":selected").attr("id"));
+			});
+		
 	});
 </script>
 
@@ -31,7 +39,7 @@
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
 
-	<form action="SeleccionarPaquete" method="post">
+	<form action="SeleccionarPaquete" method="get">
 		<p>Origen:</p>
 		<select id="selectOrigen">
 			<c:forEach items="${destinos}" var="destino">

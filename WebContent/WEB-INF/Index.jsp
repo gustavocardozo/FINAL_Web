@@ -12,7 +12,7 @@
 <div><img src="img/icono.png"></div>
 <ul class="menu">
 <li><a href="Index">Home</a></li>
-<li><a href="SeleccionarPaquete">Agregar reserva</a></li>
+<li><a href="SeleccionarDestinos">Agregar reserva</a></li>
 <li><a href="UpdateReserva">Modificar reserva</a></li>
 </ul>
 </header>
