@@ -98,8 +98,17 @@ public class GetCliente extends HttpServlet {
 			Integer idCliente = Integer.parseInt(request.getParameter("idCliente"));
 			Cliente cliente = clienteRepository.GetByIdBase(idCliente);
 
-			clientes.add(cliente);
-
+			String accion = request.getAttribute("accion").toString();
+			switch (accion) {
+			case "add":
+				clientes.add(cliente);	
+				break;
+			case "delete":
+				clientes.remove(clientes.indexOf(cliente));
+			default:
+				break;
+			}
+			
 			session.setAttribute("clientesAgregados", clientes);
 			
 			String listadoCliente = new Gson().toJson(clientes);

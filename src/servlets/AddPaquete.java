@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
 import model.Paquete;
 import model.Reserva;
+import model.Vuelo;
 import repository.ClienteRepository;
 import repository.PaqueteRepository;
 import repository.ReservaRepository;
+import repository.VueloRepository;
 
 public class AddPaquete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,10 +34,15 @@ public class AddPaquete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			VueloRepository vueloRepository = new VueloRepository();
 			PaqueteRepository paqueteRepository = new PaqueteRepository();
-			ArrayList<Paquete> paquetes = paqueteRepository.ListadoBase();
+			String where = "WHERE DESDE=" + request.getAttribute("origen") + " AND HACIA" + request.getAttribute("destino"); 
+			
+			ArrayList<Vuelo> vuelos = vueloRepository.VuelosBy(where);
+			ArrayList<Paquete> paquetes = paqueteRepository.PaquetesBy(where);
 
 			request.setAttribute("paquetes", paquetes);
+			request.setAttribute("vuelos", vuelos);
 			request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);
 			
 		} catch (Exception e) {

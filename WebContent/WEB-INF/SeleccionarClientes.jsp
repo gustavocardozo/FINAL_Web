@@ -39,7 +39,8 @@
 							dataType : "json",
 							cache : false,
 							data : {
-								idCliente : $('#idCliente').val()
+								idCliente : $('#idCliente').val(),
+								accion: "add"
 							},
 							success : function(responseJson) {
 								$('.delete').remove();
@@ -49,9 +50,35 @@
 						                    .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
 						                    .append($('<td>').text(cliente.apellido))      // Create HTML <td> element, set its text content with name of currently iterated product and append it to the <tr>.
 						                    .append($('<td>').text(cliente.dni))    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
+						                    .append($('<td>').text("<button type=\"button\" id=\"eliminar\" value=\"" + cliente.id +"\">Eliminar</button>"))
 						            });
 							}
 						});
+						 $('#eliminar').click(function() {
+		                    	$.ajax({
+		            				
+									type : "POST",
+									url : 'GetCliente',
+									async : false,
+									dataType : "json",
+									cache : false,
+									data : {
+										idCliente : $(this).attr('value'),
+										accion: "delete"
+									},
+									success : function(responseJson) {
+										$('.delete').remove();
+										 var $table = $('<table class="delete">').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
+								            $.each(responseJson, function(index, cliente) {    // Iterate over the JSON array.
+								                $('<tr>').appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
+								                    .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
+								                    .append($('<td>').text(cliente.apellido))      // Create HTML <td> element, set its text content with name of currently iterated product and append it to the <tr>.
+								                    .append($('<td>').text(cliente.dni))    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
+								                    .append($('<td>').text("<button type=\"button\" id=\"eliminar\" value=\"" + cliente.id +"\">Eliminar</button>"))
+								            });
+									}
+									});
+		                    });
 					});
 				}
 			});
