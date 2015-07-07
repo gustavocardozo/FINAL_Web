@@ -10,20 +10,20 @@
 <script>
 	$(document).ready(function() {
 		// When the HTML DOM is ready loading, then execute the following function...
-// 		$('#selectOrigen').click(function() {
-// 			$('#origen').val($(this).val());
-// 		});
-// 		$('#selectDestino').click(function() {
-// 			$('#destino').val($(this).val());
-// 		});
-		
+		// 		$('#selectOrigen').click(function() {
+		// 			$('#origen').val($(this).val());
+		// 		});
+		// 		$('#selectDestino').click(function() {
+		// 			$('#destino').val($(this).val());
+		// 		});
+
 		$("#selectOrigen").change(function() {
 			$('#origen').val($(this).children(":selected").attr("id"));
-			});
+		});
 		$("#selectDestino").change(function() {
 			$('#destino').val($(this).children(":selected").attr("id"));
-			});
-		
+		});
+
 	});
 </script>
 
@@ -39,22 +39,30 @@
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
 
-	<form action="SeleccionarPaquete" method="get">
+	<div id="errores" name="errores">
+		<c:forEach items="${errores}" var="error">
+			<p>${error}</p>
+		</c:forEach>
+	</div>
+
+	<form action="SeleccionarDestinos" method="post">
 		<p>Origen:</p>
 		<select id="selectOrigen">
 			<c:forEach items="${destinos}" var="destino">
 				<option id="${destino.id}">${destino.nombre}</option>
 			</c:forEach>
-		</select> <label for="selectOrigen" style="display:none">Debe seleccionar
-			origen</label> <input type="hidden" name="origen" id="origen" value="">
+		</select> <label for="selectOrigen" style="display: none">Debe
+			seleccionar origen</label> <input type="hidden" name="origen" id="origen"
+			value="0">
 		<p>Destino:</p>
 		<select id="selectDestino">
 			<c:forEach items="${destinos}" var="destino">
 				<option id="${destino.id}">${destino.nombre}</option>
 			</c:forEach>
-		</select><label for="selectDestino" style="display:none">Debe seleccionar
-			destino</label> <input type="hidden" name="destino" id="destino" value="">
-		<input type="submit" name="siguiente" value="Siguiente">
+		</select><label for="selectDestino" style="display: none">Debe
+			seleccionar destino</label> <input type="hidden" name="destino" id="destino"
+			value="0"> <input type="submit" name="siguiente"
+			value="Siguiente">
 	</form>
 </body>
 </html>

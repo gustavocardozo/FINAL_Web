@@ -40,7 +40,7 @@ public class SeleccionarDestinos extends HttpServlet {
 			destinos.add(destino);
 			destinos.addAll(destinoRepository.ListadoBase());
 			
-			
+			request.getSession().setAttribute("destinos", destinos);
 			request.setAttribute("destinos", destinos);
 			request.getRequestDispatcher("/WEB-INF/SeleccionarDestinos.jsp").forward(request, response);
 			
@@ -54,8 +54,34 @@ public class SeleccionarDestinos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		try {
+			ArrayList<String> errores = new ArrayList<String>();
+			String origen = request.getParameter("origen");
+			String destino = request.getParameter("destino");
+			
+			if(origen.equals(destino))
+			{
+				errores.add("El destino y origen deben ser diferentes.");
+				request.setAttribute("destinos", request.getSession().getAttribute("destinos"));
+				request.setAttribute("errores", errores);
+				request.getRequestDispatcher("/WEB-INF/SeleccionarDestinos.jsp").forward(request, response);
+			}
+			else if(origen.equals("0") || destino.equals("0"))
+			{
+				errores.add("Debe seleccionar un origen y/o destino correcto.");
+				request.setAttribute("destinos", request.getSession().getAttribute("destinos"));
+				request.setAttribute("errores", errores);
+				request.getRequestDispatcher("/WEB-INF/SeleccionarDestinos.jsp").forward(request, response);
+			}
+			else
+			{
+				request.getSession().setAttribute("doGet", true);
+				request.getRequestDispatcher("/SeleccionarPaquete").forward(request, response);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

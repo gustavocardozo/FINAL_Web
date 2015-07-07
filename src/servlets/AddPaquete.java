@@ -56,18 +56,31 @@ public class AddPaquete extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
-		Integer idPaquete = Integer.parseInt(request.getParameter("idPaquete"));
-		Reserva reserva = new Reserva();
-		PaqueteRepository paqueteRepository = new PaqueteRepository();
-		ReservaRepository reservaRepository = new ReservaRepository();
+			
+			if((boolean) request.getSession().getAttribute("doGet"))
+			{
+				request.getSession().setAttribute("doGet", false);
+				doGet(request, response);
+			}
+			else
+			{
+				Integer idPaquete = Integer.parseInt(request.getParameter("idPaquete"));
+				Integer idVuelo = Integer.parseInt(request.getParameter("idVuelo"));
+				Reserva reserva = new Reserva();
+				PaqueteRepository paqueteRepository = new PaqueteRepository();
+				VueloRepository vueloRepository = new VueloRepository();
+				ReservaRepository reservaRepository = new ReservaRepository();
+				
+				reserva.setId(reservaRepository.GetIdBase());
+				reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
+				
+				
+				request.getSession().setAttribute("reserva", reserva);
+				request.getSession().setAttribute("GET",true);
+				
+				request.getRequestDispatcher("/SeleccionarClientes").forward(request, response);
+			}
 		
-		reserva.setId(reservaRepository.GetIdBase());
-		reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
-		
-		request.getSession().setAttribute("reserva", reserva);
-		request.getSession().setAttribute("GET",true);
-		
-		request.getRequestDispatcher("/SeleccionarClientes").forward(request, response);
 		
 		}
 		catch(Exception e)
