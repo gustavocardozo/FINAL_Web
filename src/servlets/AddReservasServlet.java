@@ -29,12 +29,27 @@ public class AddReservasServlet extends HttpServlet {
 			Reserva reserva = (session.getAttribute("reserva")==null)? new Reserva() : (Reserva)session.getAttribute("reserva");
 			ArrayList<Cliente> clientesAgregados = (session.getAttribute("clientesAgregados")==null)? new ArrayList<Cliente>() : (ArrayList<Cliente>)session.getAttribute("clientesAgregados");  
 			reserva.setClientes(clientesAgregados);
-			reserva.setTotal(reserva.getPaquete().getPrecio() * reserva.getClientes().size());
-			reservaRepository.InsertarBase(reserva);
 			
-			session.invalidate();
+			if(reserva.getVuelo().getDisponibilidad() >= reserva.getClientes().size())
+			{
+				reserva.setTotal(reserva.getPaquete().getPrecio() * reserva.getClientes().size() + reserva.getClientes().size()*reserva.getVuelo().getPrecio());
+				reservaRepository.InsertarBase(reserva);
+				
+				session.invalidate();
+				
+				request.getRequestDispatcher("/WEB-INF/Felicidades.jsp").forward(request, response);
+			}
+			else
+			{
+				ArrayList<String> errores= new ArrayList<String>();
+				
+				errores.add("No hay disponibilidad en el vuelo. Seleccione otro.");
+				request.getSession().setAttribute("errores", errores);
+				request.setAttribute("errores", request.getSession().getAttribute("errores"));
+				request.getRequestDispatcher("/WEB-INF/SeleccionarClientes.jsp").forward(request, response);
+			}
 			
-			request.getRequestDispatcher("/WEB-INF/Felicidades.jsp").forward(request, response);
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -53,6 +53,11 @@
 						                    .append($('<td>').text(cliente.dni))    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
 						                    $('<input></input>').attr({'type': 'button'}).attr({'id':'eliminar'}).val(cliente.id).click(function(){
 						                    }).appendTo($('td.toinsert'));
+						                    $('#eliminar').click(function(){
+						                    	
+						                    	
+						                    
+						                    	});
 						            });
 							}
 						});

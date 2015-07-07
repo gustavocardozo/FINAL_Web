@@ -51,9 +51,6 @@ public class GetPaquete extends HttpServlet {
 			detallePaquete.append("</p>");
 			detallePaquete.append("<br>");
 			detallePaquete.append("<p>");
-			detallePaquete.append("Disponibilidad: ");
-			detallePaquete.append("</p>");
-			detallePaquete.append("<br>");
 
 			response.setContentType("text/html");
 			response.getWriter().write(detallePaquete.toString());

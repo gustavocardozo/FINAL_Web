@@ -58,7 +58,7 @@ public class GetVuelo extends HttpServlet {
 			detallePaquete.append("</p>");
 			detallePaquete.append("<br>");
 			detallePaquete.append("<p>");
-			detallePaquete.append("Disponibilidad: ");
+			detallePaquete.append("Disponibilidad: "+ vuelo.getDisponibilidad());
 			detallePaquete.append("</p>");
 			detallePaquete.append("<br>");
 

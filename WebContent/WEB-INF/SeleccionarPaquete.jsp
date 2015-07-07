@@ -67,6 +67,11 @@
 		<li><a href="SeleccionarDestinos">Agregar reserva</a></li>
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
+	<div id="errores" name="errores">
+					<c:forEach items="${errores}" var="error">
+						<p>${error}</p>
+					</c:forEach>
+	</div>
 	<div id="seleccionPaquete">
 		<form action="SeleccionarPaquete" method="post">
 			<h2>Paquetes</h2>

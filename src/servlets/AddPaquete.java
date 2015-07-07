@@ -40,7 +40,10 @@ public class AddPaquete extends HttpServlet {
 			
 			ArrayList<Vuelo> vuelos = vueloRepository.VuelosBy(where);
 			ArrayList<Paquete> paquetes = paqueteRepository.PaquetesBy(where);
-
+			
+			
+			request.getSession().setAttribute("paquetes", paquetes);
+			request.getSession().setAttribute("vuelos", paquetes);
 			request.setAttribute("paquetes", paquetes);
 			request.setAttribute("vuelos", vuelos);
 			request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);
@@ -64,8 +67,22 @@ public class AddPaquete extends HttpServlet {
 			}
 			else
 			{
-				Integer idPaquete = Integer.parseInt(request.getParameter("idPaquete"));
+				
+				
+				
+				if(request.getParameter("idVuelo").equals(""))
+				{
+					ArrayList<String> errores = new ArrayList<String>();
+					
+					errores.add("Debe seleccionar por lo menos un vuelo.");
+					request.setAttribute("errores", errores);
+					request.setAttribute("vuelos", request.getSession().getAttribute("vuelos"));
+					request.setAttribute("paquetes", request.getSession().getAttribute("paquetes"));
+					request.getSession().setAttribute("doGet", true);
+					request.getRequestDispatcher("/SeleccionarPaquete").forward(request, response);
+				}
 				Integer idVuelo = Integer.parseInt(request.getParameter("idVuelo"));
+				Integer idPaquete = Integer.parseInt((request.getParameter("idPaquete")==null)? "0":request.getParameter("idPaquete"));
 				Reserva reserva = new Reserva();
 				PaqueteRepository paqueteRepository = new PaqueteRepository();
 				VueloRepository vueloRepository = new VueloRepository();
@@ -73,7 +90,7 @@ public class AddPaquete extends HttpServlet {
 				
 				reserva.setId(reservaRepository.GetIdBase());
 				reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
-				
+				reserva.setVuelo(vueloRepository.GetByIdBase(idVuelo));
 				
 				request.getSession().setAttribute("reserva", reserva);
 				request.getSession().setAttribute("GET",true);
