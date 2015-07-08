@@ -53,6 +53,7 @@ public class AddReservasServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 		
 	}

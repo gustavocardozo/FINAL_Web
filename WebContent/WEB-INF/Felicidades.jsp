@@ -23,6 +23,6 @@
 <section class="contenedor">
 
 <h1>Felicidades, su solicitud fue procesada correctamente.</h1>
-<a href="index">Volver a la home</a>
+<a href="Index">Volver a la home</a>
 </body>
 </html>

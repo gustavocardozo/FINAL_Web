@@ -36,36 +36,38 @@ public class GetVuelo extends HttpServlet {
 			Vuelo vuelo = vueloRepository.GetByIdBase(idVuelo);
 			StringBuilder detallePaquete = new StringBuilder();
 
-			
-			detallePaquete.append("<p>");
+			detallePaquete.append("<p><b>Vuelo seleccionado</b></p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Desde: " + vuelo.getDesde());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Hacia: " + vuelo.getHacia());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Horario de Partida: " + vuelo.getPartida());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Horario de Llegada: " + vuelo.getLlegada());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Precio: " + vuelo.getPrecio());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Disponibilidad: "+ vuelo.getDisponibilidad());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
+			detallePaquete.append("<button type=\"button\" id=\"eliminarVuelo\">Eliminar vuelo</button>");
 
 			response.setContentType("text/html");
 			response.getWriter().write(detallePaquete.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 	}
 

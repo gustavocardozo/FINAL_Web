@@ -27,7 +27,35 @@ header{
 	color:black;
 }
 /*	Fin Menu 	*/
+p,h1,h2,h3,a,span{
+	font-family: "Helvetica","Open Sans","arial";
+}
+
+
 .contenedor{
 	padding-left: 15px;
   	padding-right: 15px;
+}
+.error,.error p{
+	color:red;
+}
+.selectorPaquete,.selectorVuelo,.selectorCliente{
+	cursor:pointer;
+	font-weight: bold;
+}
+.selectorPaquete:hover,.selectorVuelo:hover,.selectorCliente:hover{
+	color:#4f67f9;
+}
+#tablaPaquetes,#tablaVuelos,#tablaClientes{
+	width: 500px;
+  display: inline-block;
+  vertical-align: top;
+}
+#detallePaquete,#detalleVuelo,#detalleCliente{
+	  margin-top: 15px;
+  margin-left: 15px;
+  width: 260px;
+  left: 300px;
+  top: 0;
+  display: inline-block;
 }

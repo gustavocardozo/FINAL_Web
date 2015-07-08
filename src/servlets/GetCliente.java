@@ -41,33 +41,33 @@ public class GetCliente extends HttpServlet {
 
 			StringBuilder detalleCliente = new StringBuilder();
 
-			detalleCliente.append("<p>");
+			detalleCliente.append("<span>");
 			detalleCliente.append("Nombre: " + cliente.getNombre());
-			detalleCliente.append("</p>");
+			detalleCliente.append("</span>");
 			detalleCliente.append("<br>");
-			detalleCliente.append("<p>");
+			detalleCliente.append("<span>");
 			detalleCliente.append("Apellido:" + cliente.getApellido());
-			detalleCliente.append("</p>");
+			detalleCliente.append("</span>");
 			detalleCliente.append("<br>");
-			detalleCliente.append("<p>");
+			detalleCliente.append("<span>");
 			detalleCliente.append("Fecha de Nacimiento: " + cliente.getFecha_nacimiento());
-			detalleCliente.append("</p>");
+			detalleCliente.append("</span>");
 			detalleCliente.append("<br>");
-			detalleCliente.append("<p>");
+			detalleCliente.append("<span>");
 			detalleCliente.append("DU: " + cliente.getDni());
-			detalleCliente.append("</p>");
+			detalleCliente.append("</span>");
 			detalleCliente.append("<br>");
-			detalleCliente.append("<p>");
+			detalleCliente.append("<span>");
 			detalleCliente.append("Domicilio: " + cliente.getDireccion());
-			detalleCliente.append("</p>");
+			detalleCliente.append("</span>");
 			detalleCliente.append("<br>");
-			detalleCliente.append("<p>");
+			detalleCliente.append("<span>");
 			detalleCliente.append("EMAIL: " + cliente.getEmail());
-			detalleCliente.append("</p>");
+			detalleCliente.append("</span>");
 			detalleCliente.append("<br>");
-			detalleCliente.append("<p>");
+			detalleCliente.append("<span>");
 			detalleCliente.append("Telefono: " + cliente.getTelefono());
-			detalleCliente.append("</p>");
+			detalleCliente.append("</span>");
 			detalleCliente.append("<br>");
 			detalleCliente.append("<button type=\"button\" id=\"agregar\">Agregar</button>");
 			
@@ -78,6 +78,7 @@ public class GetCliente extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 	}
 
@@ -118,6 +119,7 @@ public class GetCliente extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 	}
 

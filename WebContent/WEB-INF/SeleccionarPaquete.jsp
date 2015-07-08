@@ -5,17 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <title>Seleccion de Paquete</title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$(document).ready(function() {
 		// When the HTML DOM is ready loading, then execute the following function...
-		$('#tablaPaquetes td').click(function() {
+		$('#tablaPaquetes .selectorPaquete').click(function() {
 			$('#idPaquete').val($(this).attr('id'));
 			// 			 alert($(this).attr('id'));
 		});
-		$('#tablaVuelos td').click(function() {
+		$('#tablaVuelos .selectorVuelo').click(function() {
 			$('#idVuelo').val($(this).attr('id'));
 			// 			 alert($(this).attr('id'));
 		});
@@ -34,6 +35,12 @@
 				},
 				success : function(responseText) {
 					$('#detallePaquete').html(responseText);
+					$('#eliminarPaquete').click(function() {
+						$('#detallePaquete').html("");
+						$("#idPaquete").val("0");
+						// 			 alert($(this).attr('id'));
+					});
+					
 				}
 			});
 		});
@@ -52,6 +59,13 @@
 					},
 					success : function(responseText) {
 						$('#detalleVuelo').html(responseText);
+						$('#eliminarVuelo').click(function() {
+							$('#detalleVuelo').html("");
+							$("#idVuelo").val("0");
+							// 			 alert($(this).attr('id'));
+						});
+						
+						
 					}
 				});
 			});
@@ -59,6 +73,7 @@
 </script>
 </head>
 <body>
+	<header>
 	<div>
 		<img src="img/icono.png">
 	</div>
@@ -67,53 +82,42 @@
 		<li><a href="SeleccionarDestinos">Agregar reserva</a></li>
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
-	<div id="errores" name="errores">
+	</header>
+	<section class="contenedor">
+	<div id="errores" class="error" name="errores">
 					<c:forEach items="${errores}" var="error">
 						<p>${error}</p>
 					</c:forEach>
 	</div>
 	<div id="seleccionPaquete">
 		<form action="SeleccionarPaquete" method="post">
-			<h2>Paquetes</h2>
-			<table id="tablaPaquetes">
-				<thead>
-					<tr>
-						<td>Descripción</td>
-					</tr>
-				</thead>
-				<tbody>
-
-					<c:forEach items="${paquetes}" var="paquete">
-						<tr>
-							<td id="${paquete.id}">${paquete.nombre}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+			<div>
+			<h3>Paquetes</h3>
+				<p>Descripción</p>
+					<ul id="tablaPaquetes" class="itemMayor">
+						<c:forEach items="${paquetes}" var="paquete">
+							<li class="item">${paquete.nombre} <a  id="${paquete.id}" class="selectorPaquete">[+Agregar]</a></li>
+						</c:forEach>
+					</ul>
 			<input type="hidden" id="idPaquete" name="idPaquete" value="">
 			<div id="detallePaquete"></div>
-			<h2>Vuelos</h2>
-			<table id="tablaVuelos">
-				<thead>
-					<tr>
-						<td>Descripción</td>
-					</tr>
-				</thead>
-				<tbody>
-
+			</div>
+			<div>
+			<h3>Vuelos</h3>
+				<p>Descripción</p>
+					<ul id="tablaVuelos" class="itemMayor">
 					<c:forEach items="${vuelos}" var="vuelo">
-						<tr>
-							<td id="${vuelo.id}">${vuelo.desde}</td>
-							<td id="${vuelo.id}">${vuelo.hacia}</td>
-						</tr>
+						
+							<li class="item" id="${vuelo.id}">${vuelo.desde}</td><td class="item" id="${vuelo.id}">${vuelo.hacia} <a  id="${vuelo.id}" class="selectorVuelo">[+Agregar]</a></li>
+						
 					</c:forEach>
-				</tbody>
-			</table>
+					</ul>
 			<div id="detalleVuelo"></div>
 			<input type="hidden" id="idVuelo" name="idVuelo" value="">
+			</div>
 			<input type="submit" name="siguiente" value="Siguiente">
 		</form>
 	</div>
-	
+	</section>
 </body>
 </html>

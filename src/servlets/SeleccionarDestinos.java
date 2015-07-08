@@ -47,6 +47,7 @@ public class SeleccionarDestinos extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 	}
 
@@ -81,6 +82,7 @@ public class SeleccionarDestinos extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 	}
 

@@ -11,7 +11,7 @@
 <script>
 	$(document).ready(function() {
 		// When the HTML DOM is ready loading, then execute the following function...
-		$('table tbody tr td').click(function() {
+		$('.selectorCliente').click(function() {
 			$('#idCliente').val($(this).attr('id'));
 // 			alert($(this).attr('id'));
 		});
@@ -45,7 +45,7 @@
 							success :
 								function(responseJson) {
 								$('.delete').remove();
-								 var $table = $('<table class="delete">').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
+								 var $table = $('<table class="delete"><thead><td>Nombre</td><td>Apellido</td><td>DNI</td></thead>').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
 						            $.each(responseJson, function(index, cliente) {    // Iterate over the JSON array.
 						                $('<tr>').appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
 						                    .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
@@ -84,6 +84,7 @@
 </script>
 </head>
 <body>
+	<header>
 	<div>
 		<img src="img/icono.png">
 	</div>
@@ -92,37 +93,27 @@
 		<li><a href="SeleccionarDestinos">Agregar reserva</a></li>
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
-	<div id="Clientes">
-		<h2>Clientes</h2>
-		<table id="tablaClientes">
-			<thead>
-				<tr>
-					<td>Nombre</td>
-				</tr>
-			</thead>
-			<tbody>
-
+	</header>
+	<section class="contenedor">
+		<h3>Clientes</h3>
+		<p>Nombre</p>
+		<ul id="tablaClientes" class="itemMayor">
 				<c:forEach items="${clientes}" var="cliente">
-					<tr>
-						<td id="${cliente.id}">${cliente.nombre}</td>
-					</tr>
+					<li class="item">${cliente.nombre} <a id="${cliente.id}" class="selectorCliente">[+Ver más]</a></li>
 				</c:forEach>
-			</tbody>
-		</table>
+		</ul>
 		<input type="hidden" id="idCliente" name="idCliente" value="">
-	</div>
 	<div id="detalleCliente"></div>
-
 
 	<div id="seleccionCliente">
 		<form action="SeleccionarClientes" method="post">
-			<h2>Clientes</h2>
+			<h3>Clientes seleccionados</h3>
 			<div id="clientesSeleccionados"></div>
 			<input type="submit" name="siguiente" value="Siguiente">
 		</form>
 	</div>
 
-
+	</section>
 
 </body>
 </html>

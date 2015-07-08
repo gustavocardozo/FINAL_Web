@@ -37,6 +37,7 @@ public class AddClientes extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 	}
 
@@ -61,6 +62,7 @@ public class AddClientes extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 	}
 

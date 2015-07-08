@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <title>Seleccionar Destinos</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
@@ -30,23 +31,25 @@
 
 </head>
 <body>
+	<header>
 	<div>
 		<img src="img/icono.png">
 	</div>
 	<ul class="menu">
 		<li><a href="Index">Home</a></li>
-		<li><a href="SeleccionarPaquete">Agregar reserva</a></li>
+		<li><a href="SeleccionarDestinos">Agregar reserva</a></li>
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
-
-	<div id="errores" name="errores">
+	</header>
+	<section class="contenedor">
+	<div id="errores" name="errores" class="error">
 		<c:forEach items="${errores}" var="error">
 			<p>${error}</p>
 		</c:forEach>
 	</div>
 
 	<form action="SeleccionarDestinos" method="post">
-		<p>Origen:</p>
+		<h3>Origen:</h3>
 		<select id="selectOrigen">
 			<c:forEach items="${destinos}" var="destino">
 				<option id="${destino.id}">${destino.nombre}</option>
@@ -54,15 +57,16 @@
 		</select> <label for="selectOrigen" style="display: none">Debe
 			seleccionar origen</label> <input type="hidden" name="origen" id="origen"
 			value="0">
-		<p>Destino:</p>
+		<h3>Destino:</h3>
 		<select id="selectDestino">
 			<c:forEach items="${destinos}" var="destino">
 				<option id="${destino.id}">${destino.nombre}</option>
 			</c:forEach>
 		</select><label for="selectDestino" style="display: none">Debe
 			seleccionar destino</label> <input type="hidden" name="destino" id="destino"
-			value="0"> <input type="submit" name="siguiente"
+			value="0"> <br><br> <input type="submit" name="siguiente"
 			value="Siguiente">
 	</form>
+	</section>
 </body>
 </html>

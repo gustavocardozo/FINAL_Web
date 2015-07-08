@@ -34,29 +34,31 @@ public class GetPaquete extends HttpServlet {
 			Paquete paquete = paqueteRepository.GetByIdBase(idPaquete);
 			StringBuilder detallePaquete = new StringBuilder();
 
-			detallePaquete.append("<p>");
+			detallePaquete.append("<p><b>Paquete seleccionado</b></p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Descripcion: " + paquete.getNombre());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Precio: " + paquete.getPrecio());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Desde: " + paquete.getDesde());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<p>");
+			detallePaquete.append("<span>");
 			detallePaquete.append("Hacia: " + paquete.getHacia());
-			detallePaquete.append("</p>");
+			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<p>");
+			detallePaquete.append("<button type=\"button\" id=\"eliminarPaquete\">Eliminar paquete</button>");
 
 			response.setContentType("text/html");
 			response.getWriter().write(detallePaquete.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 	}
 

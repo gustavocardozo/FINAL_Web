@@ -34,22 +34,35 @@ public class AddPaquete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			VueloRepository vueloRepository = new VueloRepository();
-			PaqueteRepository paqueteRepository = new PaqueteRepository();
-			String where = "WHERE DESDE=" + request.getParameter("origen") + " AND HACIA= " + request.getParameter("destino"); 
+			if(request.getSession().getAttribute("vuelos")!=null &&  request.getSession().getAttribute("paquetes")!=null)
+			{
+				request.setAttribute("paquetes", request.getSession().getAttribute("paquetes"));
+				request.setAttribute("vuelos", request.getSession().getAttribute("vuelos"));
+				request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);
+			}
+			else
+			{
+				VueloRepository vueloRepository = new VueloRepository();
+				PaqueteRepository paqueteRepository = new PaqueteRepository();
+				String where = "WHERE DESDE=" + request.getParameter("origen") + " AND HACIA= " + request.getParameter("destino"); 
+				
+				ArrayList<Vuelo> vuelos = vueloRepository.VuelosBy(where);
+				ArrayList<Paquete> paquetes = paqueteRepository.PaquetesBy(where);
+				
+				
+				request.getSession().setAttribute("paquetes", paquetes);
+				request.getSession().setAttribute("vuelos", paquetes);
+				
+				
+				request.setAttribute("paquetes", paquetes);
+				request.setAttribute("vuelos", vuelos);
+				request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);	
+			}
 			
-			ArrayList<Vuelo> vuelos = vueloRepository.VuelosBy(where);
-			ArrayList<Paquete> paquetes = paqueteRepository.PaquetesBy(where);
-			
-			
-			request.getSession().setAttribute("paquetes", paquetes);
-			request.getSession().setAttribute("vuelos", paquetes);
-			request.setAttribute("paquetes", paquetes);
-			request.setAttribute("vuelos", vuelos);
-			request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 		
 	}
@@ -82,14 +95,21 @@ public class AddPaquete extends HttpServlet {
 					request.getRequestDispatcher("/SeleccionarPaquete").forward(request, response);
 				}
 				Integer idVuelo = Integer.parseInt(request.getParameter("idVuelo"));
-				Integer idPaquete = Integer.parseInt((request.getParameter("idPaquete")==null)? "0":request.getParameter("idPaquete"));
+				Integer idPaquete = Integer.parseInt((request.getParameter("idPaquete").equals(""))? "0":request.getParameter("idPaquete"));
 				Reserva reserva = new Reserva();
 				PaqueteRepository paqueteRepository = new PaqueteRepository();
 				VueloRepository vueloRepository = new VueloRepository();
 				ReservaRepository reservaRepository = new ReservaRepository();
 				
 				reserva.setId(reservaRepository.GetIdBase());
-				reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
+				
+				if (!idPaquete.equals("0")) {
+					reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
+				}
+				else
+				{
+					reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
+				}
 				reserva.setVuelo(vueloRepository.GetByIdBase(idVuelo));
 				
 				request.getSession().setAttribute("reserva", reserva);
@@ -103,6 +123,7 @@ public class AddPaquete extends HttpServlet {
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			request.getSession().invalidate();
 		}
 	}
 }
