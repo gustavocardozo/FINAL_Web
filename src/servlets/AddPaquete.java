@@ -80,9 +80,6 @@ public class AddPaquete extends HttpServlet {
 			}
 			else
 			{
-				
-				
-				
 				if(request.getParameter("idVuelo").equals(""))
 				{
 					ArrayList<String> errores = new ArrayList<String>();
@@ -108,12 +105,14 @@ public class AddPaquete extends HttpServlet {
 				}
 				else
 				{
-					reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
+					Paquete paquete= new Paquete();
+					paquete.setId(0);
+					reserva.setPaquete(paquete);
 				}
 				reserva.setVuelo(vueloRepository.GetByIdBase(idVuelo));
 				
 				request.getSession().setAttribute("reserva", reserva);
-				request.getSession().setAttribute("GET",true);
+				request.getSession().setAttribute("doGet",true);
 				
 				request.getRequestDispatcher("/SeleccionarClientes").forward(request, response);
 			}

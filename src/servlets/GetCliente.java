@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +35,6 @@ public class GetCliente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			
 			clienteRepository = new ClienteRepository();
 			Integer idCliente = Integer.parseInt(request.getParameter("idCliente"));
 			Cliente cliente = clienteRepository.GetByIdBase(idCliente);
@@ -89,10 +89,13 @@ public class GetCliente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			HashSet<Cliente> hsClientes = new HashSet<Cliente>();
 			clienteRepository = new ClienteRepository();
 			HttpSession session = request.getSession();
 			clientes = (ArrayList<Cliente>)session.getAttribute("clientesAgregados");
+			hsClientes = (HashSet<Cliente>)session.getAttribute("hsClientes");
 			
+			if(hsClientes == null)hsClientes=   new HashSet<Cliente>();
 			if(clientes == null)clientes=   new ArrayList<Cliente>();
 					
 //					(request.getAttribute("ClientesAgregados")== null) ? new ArrayList<Cliente>() : (ArrayList<Cliente>)request.getAttribute("ClientesAgregados");
@@ -103,16 +106,19 @@ public class GetCliente extends HttpServlet {
 			switch (accion) {
 			case "add":
 				clientes.add(cliente);	
+				hsClientes.add(cliente);
 				break;
 			case "delete":
 				clientes.remove(clientes.indexOf(cliente));
+				hsClientes.add(cliente);
 			default:
 				break;
 			}
 			
 			session.setAttribute("clientesAgregados", clientes);
+			session.setAttribute("hsClientes", hsClientes);
 			
-			String listadoCliente = new Gson().toJson(clientes);
+			String listadoCliente = new Gson().toJson(hsClientes);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(listadoCliente);

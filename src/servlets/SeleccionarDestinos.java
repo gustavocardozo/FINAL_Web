@@ -28,6 +28,7 @@ public class SeleccionarDestinos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			
 			DestinoRepository destinoRepository = new DestinoRepository();
 			ArrayList<Destino> destinos = new ArrayList<Destino>();
 			
