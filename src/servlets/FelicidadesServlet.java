@@ -29,7 +29,8 @@ public class FelicidadesServlet extends HttpServlet {
 		 doAction(request, response);
 	}
 	protected void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 request.getRequestDispatcher("/Felicidades.jsp").forward(request, response);
+		request.getSession().invalidate(); 
+		request.getRequestDispatcher("/Felicidades.jsp").forward(request, response);
 	}
 
 }

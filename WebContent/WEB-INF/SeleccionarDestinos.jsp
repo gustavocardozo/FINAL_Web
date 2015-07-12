@@ -24,7 +24,6 @@
 		$("#selectDestino").change(function() {
 			$('#destino').val($(this).children(":selected").attr("id"));
 		});
-
 	});
 </script>
 

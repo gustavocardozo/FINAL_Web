@@ -20,6 +20,18 @@
 			$('#idVuelo').val($(this).attr('id'));
 			// 			 alert($(this).attr('id'));
 		});
+		var paquetes = $("#tablaPaquetes li");
+		if(paquetes.length == 0){
+			$("#tablaPaquetes").html("<span class='error'>No hay paquetes disponibles para los destinos seleccionados</span>");
+			//$("#submitPaquetes").hide();
+			//$("#volver").show();
+		}
+		var vuelos = $("#tablaVuelos li");
+		if(vuelos.length == 0){
+			$("#tablaVuelos").html("<span class='error'>No hay vuelos disponibles para los destinos seleccionados</span>");
+			$("#submitPaquetes").hide();
+			$("#volver").css("visibility","visible")
+		}
 		$('#tablaPaquetes').click(function() { // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
 		// 			$.get('GetPaquete', function(responseText) { // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
 		// 				$('#detallePaquete').text(responseText); // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
@@ -115,7 +127,8 @@
 			<div id="detalleVuelo"></div>
 			<input type="hidden" id="idVuelo" name="idVuelo" value="">
 			</div>
-			<input type="submit" name="siguiente" value="Siguiente">
+			<input type="submit" id="submitPaquetes" name="siguiente" value="Siguiente">
+			<a href="SeleccionarDestinos" class="invisible" id="volver" value="Volver">Volver</a>
 		</form>
 	</div>
 	</section>
