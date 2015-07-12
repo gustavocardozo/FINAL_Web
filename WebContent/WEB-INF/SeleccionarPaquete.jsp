@@ -111,7 +111,7 @@
 							<li class="item">${paquete.nombre} <a  id="${paquete.id}" class="selectorPaquete">[+Agregar]</a></li>
 						</c:forEach>
 					</ul>
-			<input type="hidden" id="idPaquete" name="idPaquete" value="">
+			<input type="hidden" id="idPaquete" name="idPaquete">
 			<div id="detallePaquete"></div>
 			</div>
 			<div>
@@ -125,7 +125,7 @@
 					</c:forEach>
 					</ul>
 			<div id="detalleVuelo"></div>
-			<input type="hidden" id="idVuelo" name="idVuelo" value="">
+			<input type="hidden" id="idVuelo" name="idVuelo">
 			</div>
 			<input type="submit" id="submitPaquetes" name="siguiente" value="Siguiente">
 			<a href="SeleccionarDestinos" class="invisible" id="volver" value="Volver">Volver</a>

@@ -16,6 +16,29 @@
 // 			alert($(this).attr('id'));
 		});
 		
+		$('#clientesAgregados tbody tr').each(function(index){
+			$('#eliminar'+$(this).children('td.invisible').text()).click(function(){
+				$.ajax({
+					context : this,
+					type : "POST",
+					url : 'GetCliente',
+					async : false,
+					dataType : "json",
+					cache : false,
+					data : {
+						idCliente : $(this).closest('tr').children('td.invisible').text(),
+						accion: "delete"
+					},
+					success :
+						function(responseJson) {				            
+	                    	$(this).closest('tr').remove();
+					}
+				});	
+			
+			});
+			
+		});
+		
 		$('#tablaClientes').click(function() { // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
 		// 			$.get('GetPaquete', function(responseText) { // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
 		// 				$('#detallePaquete').text(responseText); // Locate HTML DOM element with ID "somediv" and set its text content with the response text.	
@@ -127,7 +150,27 @@
 		<form action="SeleccionarClientes" method="post">
 			<h3>Clientes seleccionados</h3>
 			<div id="clientesSeleccionados">
-			<table class="delete"><thead><td>Nombre</td><td>Apellido</td><td>DNI</td></thead></table></div>
+			<c:if test="${clientesAgregados!=null}">
+				<table class="delete" id="clientesAgregados">
+					<thead>
+						<td>Nombre</td>
+						<td>Apellido</td>
+						<td>DNI</td>
+					</thead>
+					<tbody>
+						<c:forEach items="${clientesAgregados}" var="cliente">
+							<tr>
+								<td>${cliente.nombre}</td>
+								<td>${cliente.apellido}</td>
+								<td>${cliente.dni}</td>
+								<td class="invisible">${cliente.id}</td>
+								<td><input type="button" id="eliminar${cliente.id}" value="Eliminar"></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:if>
+			</div>
 			<input type="submit" name="siguiente" value="Siguiente">
 		</form>
 	</div>

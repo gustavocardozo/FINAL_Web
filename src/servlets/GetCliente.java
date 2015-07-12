@@ -115,7 +115,7 @@ public class GetCliente extends HttpServlet {
 				break;
 			}
 			
-			session.setAttribute("clientesAgregados", clientes);
+			session.setAttribute("clientesAgregados", new ArrayList<Cliente>(hsClientes));
 			session.setAttribute("hsClientes", hsClientes);
 			
 			String listadoCliente = new Gson().toJson(hsClientes);

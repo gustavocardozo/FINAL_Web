@@ -34,14 +34,6 @@ public class AddPaquete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			if(request.getSession().getAttribute("vuelos")!=null &&  request.getSession().getAttribute("paquetes")!=null)
-			{
-				request.setAttribute("paquetes", request.getSession().getAttribute("paquetes"));
-				request.setAttribute("vuelos", request.getSession().getAttribute("vuelos"));
-				request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);
-			}
-			else
-			{
 				VueloRepository vueloRepository = new VueloRepository();
 				PaqueteRepository paqueteRepository = new PaqueteRepository();
 				String where = "WHERE DESDE=" + request.getParameter("origen") + " AND HACIA= " + request.getParameter("destino"); 
@@ -56,10 +48,7 @@ public class AddPaquete extends HttpServlet {
 				
 				request.setAttribute("paquetes", paquetes);
 				request.setAttribute("vuelos", vuelos);
-				request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);	
-			}
-			
-			
+				request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);				
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().invalidate();
@@ -88,33 +77,35 @@ public class AddPaquete extends HttpServlet {
 					request.setAttribute("errores", errores);
 					request.setAttribute("vuelos", request.getSession().getAttribute("vuelos"));
 					request.setAttribute("paquetes", request.getSession().getAttribute("paquetes"));
-					request.getSession().setAttribute("doGet", true);
-					request.getRequestDispatcher("/SeleccionarPaquete").forward(request, response);
-				}
-				Integer idVuelo = Integer.parseInt(request.getParameter("idVuelo"));
-				Integer idPaquete = Integer.parseInt((request.getParameter("idPaquete").equals(""))? "0":request.getParameter("idPaquete"));
-				Reserva reserva = new Reserva();
-				PaqueteRepository paqueteRepository = new PaqueteRepository();
-				VueloRepository vueloRepository = new VueloRepository();
-				ReservaRepository reservaRepository = new ReservaRepository();
-				
-				reserva.setId(reservaRepository.GetIdBase());
-				
-				if (!idPaquete.equals("0")) {
-					reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
+					request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);
 				}
 				else
 				{
-					Paquete paquete= new Paquete();
-					paquete.setId(0);
-					reserva.setPaquete(paquete);
+					Integer idVuelo = Integer.parseInt(request.getParameter("idVuelo"));
+					Integer idPaquete = Integer.parseInt((request.getParameter("idPaquete").equals(""))? "0":request.getParameter("idPaquete"));
+					Reserva reserva = new Reserva();
+					PaqueteRepository paqueteRepository = new PaqueteRepository();
+					VueloRepository vueloRepository = new VueloRepository();
+					ReservaRepository reservaRepository = new ReservaRepository();
+					
+					reserva.setId(reservaRepository.GetIdBase());
+					
+					if (!idPaquete.equals(0)) {
+						reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
+					}
+					else
+					{
+						Paquete paquete= new Paquete();
+						paquete.setId(0);
+						reserva.setPaquete(paquete);
+					}
+					reserva.setVuelo(vueloRepository.GetByIdBase(idVuelo));
+					
+					request.getSession().setAttribute("reserva", reserva);
+					request.getSession().setAttribute("doGet",true);
+					
+					request.getRequestDispatcher("/SeleccionarClientes").forward(request, response);
 				}
-				reserva.setVuelo(vueloRepository.GetByIdBase(idVuelo));
-				
-				request.getSession().setAttribute("reserva", reserva);
-				request.getSession().setAttribute("doGet",true);
-				
-				request.getRequestDispatcher("/SeleccionarClientes").forward(request, response);
 			}
 		
 		

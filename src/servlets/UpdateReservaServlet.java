@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Reserva;
 import repository.*;
 
 
@@ -20,13 +21,28 @@ public class UpdateReservaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	{
 		try {
-			Integer idReserva = Integer.parseInt(request.getParameter("idReserva"));
+			ReservaRepository reservaRepository = new ReservaRepository();
+			DestinoRepository destinoRepository = new DestinoRepository();
 			
-//			ReservaRepository reservaRepository = new ReservaRepository();
+			if(request.getParameter("idReserva")==null)
+			{
+				Integer idReserva = Integer.parseInt(request.getParameter("idReserva"));
+				Reserva reserva = reservaRepository.GetByIdBase(idReserva);
+				request.getSession().setAttribute("reserva", reserva);
+				request.getSession().setAttribute("clientesAgregados", reserva.getClientes());
+				request.getSession().setAttribute("vuelo", reserva.getVuelo());
+				request.getSession().setAttribute("paquete", reserva.getPaquete());
+				request.getSession().setAttribute("destinos", destinoRepository.ListadoBase());
+				
+				request.setAttribute("reserva", reserva);
+				request.setAttribute("vuelo", reserva.getVuelo());
+				request.getRequestDispatcher("/WEB-INF/SeleccionarDestinos.jsp");
+				return;
+			}
 			
-//			request.setAttribute("reserva", reservaRepository.GetByIdBase(idReserva));
+			request.setAttribute("reservas", reservaRepository.ListadoBase());
+			request.getRequestDispatcher("/WEB-INF/ListadoReservas.jsp").forward(request, response);
 			
-			request.getRequestDispatcher("/UpdateReserva").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
