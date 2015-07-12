@@ -110,7 +110,7 @@ public class GetCliente extends HttpServlet {
 				break;
 			case "delete":
 				clientes.remove(clientes.indexOf(cliente));
-				hsClientes.add(cliente);
+				hsClientes.remove(cliente);
 			default:
 				break;
 			}

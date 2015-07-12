@@ -59,3 +59,8 @@ p,h1,h2,h3,a,span{
   top: 0;
   display: inline-block;
 }
+.invisible{
+
+visibility: hidden;
+
+}

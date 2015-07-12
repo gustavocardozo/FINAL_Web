@@ -20,6 +20,7 @@
 		// 			$.get('GetPaquete', function(responseText) { // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
 		// 				$('#detallePaquete').text(responseText); // Locate HTML DOM element with ID "somediv" and set its text content with the response text.	
 			$.ajax({
+// 				context : this,
 				type : "GET",
 				url : 'GetCliente',
 				async : false,
@@ -32,7 +33,7 @@
 					$('#detalleCliente').html(responseText);
 					$('#agregar').click(function() {
 						$.ajax({
-				
+// 							context : this,
 							type : "POST",
 							url : 'GetCliente',
 							async : false,
@@ -47,18 +48,35 @@
 								$('.delete').remove();
 								 var $table = $('<table class="delete"><thead><td>Nombre</td><td>Apellido</td><td>DNI</td></thead>').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
 						            $.each(responseJson, function(index, cliente) {    // Iterate over the JSON array.
-						                $('<tr>').appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
+						                $('<tr value="'+cliente.id+'">').appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
 						                    .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
 						                    .append($('<td>').text(cliente.apellido))      // Create HTML <td> element, set its text content with name of currently iterated product and append it to the <tr>.
 						                    .append($('<td>').text(cliente.dni))    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
-						                    $('<input></input>').attr({'type': 'button'}).attr({'id':'eliminar'}).val(cliente.id).click(function(){
-						                    }).appendTo($('td.toinsert'));
-						                    $('#eliminar').click(function(){
-						                    	
-						                    	
-						                    
-						                    	});
+						                    .append($('<td id="append'+cliente.id+'">'))
+						                    .append($('<td class="invisible">').text(cliente.id))
+						                    $('<input type="button" id="eliminar'+cliente.id+'" value="Eliminar"></input>').appendTo($("#append"+cliente.id+""))
+						                    $('#eliminar'+cliente.id).click(function(){
+								            	alert($(this).closest('tr').children('td.invisible').text());						            
+						                    	$.ajax({
+						 							context : this,
+													type : "POST",
+													url : 'GetCliente',
+													async : false,
+													dataType : "json",
+													cache : false,
+													data : {
+														idCliente : $(this).closest('tr').children('td.invisible').text(),
+														accion: "delete"
+													},
+													success :
+														function(responseJson) {				            
+									                    	$(this).closest('tr').remove();
+													}
+												});				                    	
+						                    });
+		
 						            });
+						           
 							}
 						});
 					});
@@ -108,7 +126,8 @@
 	<div id="seleccionCliente">
 		<form action="SeleccionarClientes" method="post">
 			<h3>Clientes seleccionados</h3>
-			<div id="clientesSeleccionados"></div>
+			<div id="clientesSeleccionados">
+			<table class="delete"><thead><td>Nombre</td><td>Apellido</td><td>DNI</td></thead></table></div>
 			<input type="submit" name="siguiente" value="Siguiente">
 		</form>
 	</div>
