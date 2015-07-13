@@ -33,7 +33,15 @@ public class AddReservasServlet extends HttpServlet {
 			if(reserva.getVuelo().getDisponibilidad() >= reserva.getClientes().size())
 			{
 				reserva.setTotal(reserva.getPaquete().getPrecio() * reserva.getClientes().size() + reserva.getClientes().size()*reserva.getVuelo().getPrecio());
-				reservaRepository.InsertarBase(reserva);
+				if((Boolean)session.getAttribute("modificacion"))
+				{
+					reservaRepository.InsertarBase(reserva);
+				}
+				else
+				{
+					reservaRepository.ModificarBase(reserva);
+				}
+				
 				
 				session.invalidate();
 				
