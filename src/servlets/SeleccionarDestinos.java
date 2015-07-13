@@ -68,19 +68,23 @@ public class SeleccionarDestinos extends HttpServlet {
 			String origen = request.getParameter("origen");
 			String destino = request.getParameter("destino");
 
-			if (origen.equals(destino)) {
-				errores.add("El destino y origen deben ser diferentes.");
-				request.setAttribute("destinos", request.getSession().getAttribute("destinos"));
-				request.setAttribute("errores", errores);
-				request.getRequestDispatcher("/WEB-INF/SeleccionarDestinos.jsp").forward(request, response);
-			} else if (origen.equals("0") || destino.equals("0")) {
-				errores.add("Debe seleccionar un origen y/o destino correcto.");
-				request.setAttribute("destinos", request.getSession().getAttribute("destinos"));
-				request.setAttribute("errores", errores);
-				request.getRequestDispatcher("/WEB-INF/SeleccionarDestinos.jsp").forward(request, response);
-			} else {
-				request.getSession().setAttribute("doGet", true);
-				request.getRequestDispatcher("/SeleccionarPaquete").forward(request, response);
+			if(origen != null &&  destino != null){
+				if (origen.equals(destino)) {
+					errores.add("El destino y origen deben ser diferentes.");
+					request.setAttribute("destinos", request.getSession().getAttribute("destinos"));
+					request.setAttribute("errores", errores);
+					request.getRequestDispatcher("/WEB-INF/SeleccionarDestinos.jsp").forward(request, response);
+				} else if (origen.equals("0") || destino.equals("0")) {
+					errores.add("Debe seleccionar un origen y/o destino correcto.");
+					request.setAttribute("destinos", request.getSession().getAttribute("destinos"));
+					request.setAttribute("errores", errores);
+					request.getRequestDispatcher("/WEB-INF/SeleccionarDestinos.jsp").forward(request, response);
+				} else {
+					request.getSession().setAttribute("doGet", true);
+					request.getRequestDispatcher("/SeleccionarPaquete").forward(request, response);
+				}
+			}else{
+				 System.out.println("Origen y destino nulo...");
 			}
 
 		} catch (Exception e) {

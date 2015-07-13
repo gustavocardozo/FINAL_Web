@@ -100,6 +100,7 @@ public class AddPaquete extends HttpServlet {
 						paquete.setId(0);
 						reserva.setPaquete(paquete);
 					}
+					reserva.setVuelo(new Vuelo());
 					reserva.setVuelo(vueloRepository.GetByIdBase(idVuelo));
 					
 					request.getSession().setAttribute("reserva", reserva);

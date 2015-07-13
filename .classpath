@@ -11,6 +11,6 @@
 	<classpathentry kind="lib" path="mysql-connector-java-5.1.29-bin.jar"/>
 	<classpathentry kind="lib" path="C:/xampp/tomcat/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.3.1.jar"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/FINAL_DAO"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/FINAL_DAO"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
