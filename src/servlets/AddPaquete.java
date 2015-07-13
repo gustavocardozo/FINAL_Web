@@ -45,7 +45,8 @@ public class AddPaquete extends HttpServlet {
 				request.getSession().setAttribute("paquetes", paquetes);
 				request.getSession().setAttribute("vuelos", paquetes);
 				
-				
+				request.setAttribute("vuelo", request.getSession().getAttribute("vuelo"));
+				request.setAttribute("paquete", request.getSession().getAttribute("paquete"));
 				request.setAttribute("paquetes", paquetes);
 				request.setAttribute("vuelos", vuelos);
 				request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);				

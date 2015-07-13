@@ -22,7 +22,7 @@
 <p>
 <span>Seleccione una reserva</span><br>
 	<c:forEach items= "${reservas}" var="reserva">
-		<a href="?id=${reserva.id}"> ${reserva.paquete.nombre} </a><br>
+		<a href="?idReserva=${reserva.id}"> ${reserva.paquete.nombre} </a><br>
 	</c:forEach>
 </p>
 </section>

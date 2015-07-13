@@ -81,6 +81,56 @@
 					}
 				});
 			});
+		
+		$(function(){
+			
+			if($("#idPaquete").val()!=0){
+				$.ajax({
+
+					type : "GET",
+					url : 'GetPaquete',
+					async : false,
+					dataType : "html",
+					cache : false,
+					data : {
+						idPaquete : $('#idPaquete').val()
+					},
+					success : function(responseText) {
+						$('#detallePaquete').html(responseText);
+						$('#eliminarPaquete').click(function() {
+							$('#detallePaquete').html("");
+							$("#idPaquete").val("0");
+							// 			 alert($(this).attr('id'));
+						});
+						
+					}
+				});
+			}
+			
+			if($("#idVuelo").val()!=0){
+				$.ajax({
+
+					type : "GET",
+					url : 'GetVuelo',
+					async : false,
+					dataType : "html",
+					cache : false,
+					data : {
+						idVuelo : $('#idVuelo').val()
+					},
+					success : function(responseText) {
+						$('#detalleVuelo').html(responseText);
+						$('#eliminarVuelo').click(function() {
+							$('#detalleVuelo').html("");
+							$("#idVuelo").val("0");
+							// 			 alert($(this).attr('id'));
+						});
+						
+						
+					}
+				});
+			}
+		});
 	});
 </script>
 </head>
@@ -111,7 +161,16 @@
 							<li class="item">${paquete.nombre} <a  id="${paquete.id}" class="selectorPaquete">[+Agregar]</a></li>
 						</c:forEach>
 					</ul>
-			<input type="hidden" id="idPaquete" name="idPaquete">
+					
+			<c:choose>
+				<c:when test="${paquete.id!=null}">
+					<input type="hidden" id="idPaquete" name="idPaquete" value="${paquete.id}">	
+				</c:when>
+				<c:otherwise>
+					<input type="hidden" id="idPaquete" name="idPaquete" value="0">
+				</c:otherwise>
+			</c:choose>
+			
 			<div id="detallePaquete"></div>
 			</div>
 			<div>
@@ -125,7 +184,14 @@
 					</c:forEach>
 					</ul>
 			<div id="detalleVuelo"></div>
-			<input type="hidden" id="idVuelo" name="idVuelo">
+			<c:choose>
+				<c:when test="${vuelo.id!=null}">
+					<input type="hidden" id="idVuelo" name="idVuelo" value="${vuelo.id}">
+				</c:when>
+				<c:otherwise>
+					<input type="hidden" id="idVuelo" name="idVuelo" value="0">
+				</c:otherwise>
+			</c:choose>
 			</div>
 			<input type="submit" id="submitPaquetes" name="siguiente" value="Siguiente">
 			<a href="SeleccionarDestinos" class="invisible" id="volver" value="Volver">Volver</a>
