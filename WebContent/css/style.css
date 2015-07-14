@@ -54,7 +54,7 @@ p,h1,h2,h3,a,span{
 #detallePaquete,#detalleVuelo,#detalleCliente{
 	  margin-top: 15px;
   margin-left: 15px;
-  width: 260px;
+  width: 350px;
   left: 300px;
   top: 0;
   display: inline-block;

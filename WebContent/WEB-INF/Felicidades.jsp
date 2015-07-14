@@ -15,7 +15,7 @@
 <header>
 <div><img src="img/icono.png"></div>
 <ul class="menu">
-<li><a href="">Home</a></li>
+<li><a href="Index">Home</a></li>
 <li><a href="AgregarReserva">Agregar reserva</a></li>
 <li><a href="UpdateReserva">Modificar reserva</a></li>
 </ul>

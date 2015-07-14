@@ -36,6 +36,7 @@ public class AddClientes extends HttpServlet {
 			reserva = (Reserva) request.getAttribute("reserva");
 			clientes = clienteRepository.ListadoBase();
 
+			request.getSession().setAttribute("clientes", clientes);
 			request.setAttribute("clientes", clientes);
 			request.getRequestDispatcher("/WEB-INF/SeleccionarClientes.jsp").forward(request, response);
 
@@ -58,7 +59,7 @@ public class AddClientes extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-
+			ArrayList<String> errores = new ArrayList<String>();
 			if ((Boolean) request.getSession().getAttribute("doGet")) {
 				request.getSession().setAttribute("doGet", false);
 				doGet(request, response);
@@ -73,22 +74,39 @@ public class AddClientes extends HttpServlet {
 						? new ArrayList<Cliente>() : (ArrayList<Cliente>) session.getAttribute("clientesAgregados");
 				reserva.setClientes(clientesAgregados);
 				
-				if (reserva.getVuelo().getDisponibilidad() >= reserva.getClientes().size()) {
-					reserva.setTotal(reserva.getPaquete().getPrecio() * reserva.getClientes().size()
-							+ reserva.getClientes().size() * reserva.getVuelo().getPrecio());
-					session.setAttribute("reserva", reserva);
-
-					request.getRequestDispatcher("SuccessAddReservas").forward(request, response);
-				} else {
-					ArrayList<String> errores = new ArrayList<String>();
-
-					errores.add("No hay disponibilidad en el vuelo. Seleccione otro.");
+				if(reserva.getClientes().size() <= 0){
+					
+					errores.add("Debe seleccionar al menos un cliente.");
 					request.getSession().setAttribute("errores", errores);
-					request.setAttribute("errores", request.getSession().getAttribute("errores"));
+					request.setAttribute("clientes", request.getSession().getAttribute("clientes"));
+					request.setAttribute("clientes", request.getSession().getAttribute("clientesAgregados"));
+					request.setAttribute("errores", errores);
 					request.getRequestDispatcher("/WEB-INF/SeleccionarClientes.jsp").forward(request, response);
 				}
+				else
+				{
+					Integer disponibilidad = reserva.getVuelo().getDisponibilidad();
+					
+					if((boolean)((request.getSession().getAttribute("modificacion")==null)?false:request.getSession().getAttribute("modificacion")))
+					{
+						disponibilidad += Integer.parseInt((request.getSession().getAttribute("cantidadVieja").toString()==null)?"0":request.getSession().getAttribute("cantidadVieja").toString());
+					}
+					if ( disponibilidad >= reserva.getClientes().size()) {
+						reserva.setTotal(reserva.getPaquete().getPrecio() * reserva.getClientes().size()
+								+ reserva.getClientes().size() * reserva.getVuelo().getPrecio());
+						session.setAttribute("reserva", reserva);
 
-				
+						request.getRequestDispatcher("SuccessAddReservas").forward(request, response);
+					} else {
+
+
+						errores.add("No hay disponibilidad en el vuelo. Seleccione otro.");
+						request.setAttribute("clientes", request.getSession().getAttribute("clientes"));
+						request.setAttribute("clientes", request.getSession().getAttribute("clientesAgregados"));
+						request.setAttribute("errores", errores);
+						request.getRequestDispatcher("/WEB-INF/SeleccionarClientes.jsp").forward(request, response);
+					}
+				}
 			}
 
 		} catch (Exception e) {

@@ -26,8 +26,8 @@ public class SuccessAddReservasServlet extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			
-			request.setAttribute("vuelo", session.getAttribute("vuelo"));
-			request.setAttribute("paquete", session.getAttribute("paquete"));
+//			request.setAttribute("vuelo", session.getAttribute("vuelo"));
+//			request.setAttribute("paquete", session.getAttribute("paquete"));
 			request.setAttribute("reserva", session.getAttribute("reserva"));
 			
 			request.getRequestDispatcher("/WEB-INF/Confirmacion.jsp").forward(request, response);

@@ -38,6 +38,7 @@ public class UpdateReservaServlet extends HttpServlet {
 				request.getSession().setAttribute("vuelo", reserva.getVuelo());
 				request.getSession().setAttribute("paquete", reserva.getPaquete());
 				request.getSession().setAttribute("destinos", destinoRepository.ListadoBase());
+				request.getSession().setAttribute("cantidadVieja", reserva.getClientes().size());
 				request.getSession().setAttribute("modificacion", true);
 				
 				request.setAttribute("reserva", reserva);

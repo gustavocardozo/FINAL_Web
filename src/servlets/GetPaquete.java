@@ -44,11 +44,11 @@ public class GetPaquete extends HttpServlet {
 			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
 			detallePaquete.append("<span>");
-			detallePaquete.append("Desde: " + paquete.getDesde());
+			detallePaquete.append("Desde: " + paquete.getDesde().getNombre());
 			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
 			detallePaquete.append("<span>");
-			detallePaquete.append("Hacia: " + paquete.getHacia());
+			detallePaquete.append("Hacia: " + paquete.getHacia().getNombre());
 			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
 			detallePaquete.append("<button type=\"button\" id=\"eliminarPaquete\">Eliminar paquete</button>");

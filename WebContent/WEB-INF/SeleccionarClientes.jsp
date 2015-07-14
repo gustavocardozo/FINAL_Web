@@ -79,7 +79,7 @@
 						                    .append($('<td class="invisible">').text(cliente.id))
 						                    $('<input type="button" id="eliminar'+cliente.id+'" value="Eliminar"></input>').appendTo($("#append"+cliente.id+""))
 						                    $('#eliminar'+cliente.id).click(function(){
-								            	alert($(this).closest('tr').children('td.invisible').text());						            
+// 								            	alert($(this).closest('tr').children('td.invisible').text());						            
 						                    	$.ajax({
 						 							context : this,
 													type : "POST",
@@ -136,6 +136,12 @@
 	</ul>
 	</header>
 	<section class="contenedor">
+		
+		<div id="errores" name="errores" class="error">
+		<c:forEach items="${errores}" var="error">
+			<p>${error}</p>
+		</c:forEach>
+		</div>
 		<h3>Clientes</h3>
 		<p>Nombre</p>
 		<ul id="tablaClientes" class="itemMayor">

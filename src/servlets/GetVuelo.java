@@ -1,6 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,6 +33,7 @@ public class GetVuelo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
 			Integer idVuelo = Integer.parseInt(request.getParameter("idVuelo"));
 			VueloRepository vueloRepository = new VueloRepository();
 
@@ -38,19 +42,19 @@ public class GetVuelo extends HttpServlet {
 
 			detallePaquete.append("<p><b>Vuelo seleccionado</b></p>");
 			detallePaquete.append("<span>");
-			detallePaquete.append("Desde: " + vuelo.getDesde());
+			detallePaquete.append("Desde: " + vuelo.getDesde().getDescripcion());
 			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
 			detallePaquete.append("<span>");
-			detallePaquete.append("Hacia: " + vuelo.getHacia());
+			detallePaquete.append("Hacia: " + vuelo.getHacia().getDescripcion());
 			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
 			detallePaquete.append("<span>");
-			detallePaquete.append("Horario de Partida: " + vuelo.getPartida());
+			detallePaquete.append("Horario de Partida: " + formatoFecha.format(vuelo.getPartida()));
 			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
 			detallePaquete.append("<span>");
-			detallePaquete.append("Horario de Llegada: " + vuelo.getLlegada());
+			detallePaquete.append("Horario de Llegada: " + formatoFecha.format(vuelo.getLlegada()));
 			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
 			detallePaquete.append("<span>");

@@ -32,7 +32,7 @@
 			$("#submitPaquetes").hide();
 			$("#volver").css("visibility","visible")
 		}
-		$('#tablaPaquetes').click(function() { // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
+		$('#tablaPaquetes .selectorPaquete').click(function() { // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
 		// 			$.get('GetPaquete', function(responseText) { // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
 		// 				$('#detallePaquete').text(responseText); // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
 			$.ajax({
@@ -56,7 +56,7 @@
 				}
 			});
 		});
-		$('#tablaVuelos').click(function() { // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
+		$('#tablaVuelos .selectorVuelo').click(function() { // Locate HTML DOM element with ID "somebutton" and assign the following function to its "click" event...
 			// 			$.get('GetPaquete', function(responseText) { // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response text...
 			// 				$('#detallePaquete').text(responseText); // Locate HTML DOM element with ID "somediv" and set its text content with the response text.
 				$.ajax({
@@ -179,7 +179,7 @@
 					<ul id="tablaVuelos" class="itemMayor">
 					<c:forEach items="${vuelos}" var="vuelo">
 						
-							<li class="item" id="${vuelo.id}">${vuelo.desde}</td><td class="item" id="${vuelo.id}">${vuelo.hacia} <a  id="${vuelo.id}" class="selectorVuelo">[+Agregar]</a></li>
+							<li class="item" id="${vuelo.id}">${vuelo.desde.nombre} - </td><td class="item" id="${vuelo.id}">${vuelo.hacia.nombre} <a  id="${vuelo.id}" class="selectorVuelo">[+Agregar]</a></li>
 						
 					</c:forEach>
 					</ul>

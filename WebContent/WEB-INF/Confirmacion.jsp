@@ -52,21 +52,23 @@
 			<b>VUELO:</b>
 		</p>
 		<ul id="tablaVuelos" class="itemMayor">
-			<c:forEach items="${vuelos}" var="vuelo">
-				<li class="item" id="${vuelo.id}">${vuelo.desde}</td>
-					<td class="item" id="${vuelo.id}">${vuelo.hacia}</li>
-			</c:forEach>
+<%-- 			<c:forEach items="${vuelos}" var="vuelo"> --%>
+				<li class="item" id="${reserva.vuelo.id}">
+					${reserva.vuelo.desde.descripcion} - ${reserva.vuelo.hacia.descripcion}
+				</li>
+<%-- 			</c:forEach> --%>
 		</ul>
-		<c:if test="${paquete.id != '0'}">
+<!-- 		 &&  -->
+		<c:if test="${reserva.paquete.id != 0 && reserva.paquete.id!='' && reserva.paquete.id!=null}">
 			<p>
 				<b>PAQUETE:</b>
 			</p>
 			<ul id="tablaPaquetes" class="itemMayor">
-					<li class="item">${paquete.nombre}</li>
+					<li class="item">${reserva.paquete.id} - ${reserva.paquete.nombre}</li>
 			</ul>
 		</c:if>
 
-		<h3>Total:</h3>${reserva.total}<br> <input type="submit" value="Confirmar"> 
+		<p>Total:<b>$ ${reserva.total} </b><br></p> <input type="submit" value="Confirmar"> 
 			<a href="Index?borrar=true"><input type="button" name="Cancelar" value="Cancelar"></a>
 	</form>
 	</section>
