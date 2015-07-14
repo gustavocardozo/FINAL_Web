@@ -93,10 +93,11 @@ public class GetCliente extends HttpServlet {
 			clienteRepository = new ClienteRepository();
 			HttpSession session = request.getSession();
 			clientes = (ArrayList<Cliente>)session.getAttribute("clientesAgregados");
-			hsClientes = (HashSet<Cliente>)session.getAttribute("hsClientes");
 			
-			if(hsClientes == null)hsClientes=   new HashSet<Cliente>();
+			
+//			if(hsClientes == null)hsClientes=   new HashSet<Cliente>();
 			if(clientes == null)clientes=   new ArrayList<Cliente>();
+			hsClientes = new HashSet<Cliente>(clientes);
 					
 //					(request.getAttribute("ClientesAgregados")== null) ? new ArrayList<Cliente>() : (ArrayList<Cliente>)request.getAttribute("ClientesAgregados");
 			Integer idCliente = Integer.parseInt(request.getParameter("idCliente"));
@@ -105,20 +106,20 @@ public class GetCliente extends HttpServlet {
 			String accion = request.getParameter("accion").toString();
 			switch (accion) {
 			case "add":
-				clientes.add(cliente);	
+//				clientes.add(cliente);	
 				hsClientes.add(cliente);
 				break;
 			case "delete":
-				clientes.remove(clientes.indexOf(cliente));
+//				clientes.remove(cliente);
 				hsClientes.remove(cliente);
 			default:
 				break;
 			}
 			
 			session.setAttribute("clientesAgregados", new ArrayList<Cliente>(hsClientes));
-			session.setAttribute("hsClientes", hsClientes);
+//			session.setAttribute("hsClientes", hsClientes);
 			
-			String listadoCliente = new Gson().toJson(hsClientes);
+			String listadoCliente = new Gson().toJson(new ArrayList<Cliente>(hsClientes));
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(listadoCliente);

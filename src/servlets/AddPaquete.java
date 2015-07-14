@@ -43,7 +43,7 @@ public class AddPaquete extends HttpServlet {
 				
 				
 				request.getSession().setAttribute("paquetes", paquetes);
-				request.getSession().setAttribute("vuelos", paquetes);
+				request.getSession().setAttribute("vuelos", vuelos);
 				
 				request.setAttribute("vuelo", request.getSession().getAttribute("vuelo"));
 				request.setAttribute("paquete", request.getSession().getAttribute("paquete"));
@@ -53,6 +53,12 @@ public class AddPaquete extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().invalidate();
+			try {
+				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
+			} catch (ServletException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
 		}
 		
 	}
@@ -70,7 +76,7 @@ public class AddPaquete extends HttpServlet {
 			}
 			else
 			{
-				if(request.getParameter("idVuelo").equals(""))
+				if(request.getParameter("idVuelo").equals("") || request.getParameter("idVuelo").equals("0"))
 				{
 					ArrayList<String> errores = new ArrayList<String>();
 					
@@ -89,7 +95,16 @@ public class AddPaquete extends HttpServlet {
 					VueloRepository vueloRepository = new VueloRepository();
 					ReservaRepository reservaRepository = new ReservaRepository();
 					
-					reserva.setId(reservaRepository.GetIdBase());
+					
+					if(!(boolean)((request.getSession().getAttribute("modificacion")==null)?false:request.getSession().getAttribute("modificacion")))
+					{
+						reserva.setId(reservaRepository.GetIdBase());
+					}
+					else
+					{
+						reserva = (Reserva) request.getSession().getAttribute("reserva");
+					}
+					
 					
 					if (!idPaquete.equals(0)) {
 						reserva.setPaquete(paqueteRepository.GetByIdBase(idPaquete));
@@ -97,7 +112,7 @@ public class AddPaquete extends HttpServlet {
 					else
 					{
 						Paquete paquete= new Paquete();
-						paquete.setId(0);
+//						paquete.setId(0);
 						reserva.setPaquete(paquete);
 					}
 					reserva.setVuelo(new Vuelo());
@@ -116,6 +131,12 @@ public class AddPaquete extends HttpServlet {
 		{
 			e.printStackTrace();
 			request.getSession().invalidate();
+			try {
+				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
+			} catch (ServletException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
 		}
 	}
 }

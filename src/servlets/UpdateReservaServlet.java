@@ -1,9 +1,14 @@
 package servlets;
 
+import java.io.IOException;
+import java.util.HashSet;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Cliente;
 import model.Reserva;
 import repository.*;
 
@@ -37,6 +42,7 @@ public class UpdateReservaServlet extends HttpServlet {
 				
 				request.setAttribute("reserva", reserva);
 				request.setAttribute("vuelo", reserva.getVuelo());
+				request.setAttribute("paquete", reserva.getPaquete());
 				request.getRequestDispatcher("/WEB-INF/SeleccionarDestinos.jsp").forward(request, response);
 				return;
 			}
@@ -46,6 +52,12 @@ public class UpdateReservaServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			try {
+				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
+			} catch (ServletException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
 		}
 		
 	}

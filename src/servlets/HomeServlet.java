@@ -16,7 +16,14 @@ public class HomeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		try{
+			if(request.getParameter("borrar") != null){
+				request.getSession().invalidate();
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		request.getRequestDispatcher("/WEB-INF/Index.jsp").forward(request, response);
 		
 	}

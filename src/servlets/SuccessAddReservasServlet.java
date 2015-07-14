@@ -13,7 +13,7 @@ import repository.PaqueteRepository;
 import repository.ReservaRepository;
 import model.*;
 
-public class SuccessAddReservasServlet extends HttpServlet{
+public class SuccessAddReservasServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -21,64 +21,44 @@ public class SuccessAddReservasServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unchecked")
-	public void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session= request.getSession();
-		
-		Reserva reserva = new Reserva();
-		Paquete paquete = new Paquete();
-		PaqueteRepository paqueteRepository = new PaqueteRepository();
-		ReservaRepository reservaRepository = new ReservaRepository();
-		
-		Vuelo vuelo = new Vuelo();
-		
-		int idPaquete = 0;
-		int cantidad = 0;
-		String observaciones = "";
-		
-		
-		
-		idPaquete = Integer.parseInt(request.getParameter("paquetes"));
-//		observaciones = (String) request.getParameter("observaciones");
-		
-		ArrayList<Cliente> lista = (ArrayList<Cliente>) session.getAttribute("clientesSession");
-		if(lista == null)
-			request.getRequestDispatcher("Error").forward(request, response);
-		reserva.setId(reservaRepository.GetIdBase());
-		reserva.setClientes(lista);
-		paquete = paqueteRepository.GetByIdBase(idPaquete);
-		reserva.setPaquete(paquete);
-		reserva.setTotal(paquete.getPrecio()*lista.size());
-		
-		if(reservaRepository.ValidarDisponibilidad(reserva) >= lista.size())
-		{
-				if(reservaRepository.InsertarBase(reserva))
-				{
-					session.setAttribute("clientesSession",null);
-					request.getRequestDispatcher("Felicidades").forward(request, response);
-				}
-		}	
-		
-//		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-//		
-//		ReservaRepository reservaRepository = new ReservaRepository();
-//		
-//		vuelo= (Vuelo)request.getAttribute("Vuelo");
-//		paquete = (Paquete)request.getAttribute("Paquete");
-//		clientes = (ArrayList<Cliente>)request.getAttribute("ListaClientes");
-//		
-//		reserva.setClientes(clientes);
-//		reserva.setPaquete(paquete);
-//		reserva.setTotal(paquete.getPrecio() * clientes.size());
-//		
-//		if(reservaRepository.ValidarDisponibilidad(reserva) >= clientes.size())
-//		{
-//			if(reservaRepository.InsertarBase(reserva))
-//			{
-//			}
-//		}	
-		
-		
-	}
+	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 
+		try {
+			HttpSession session = request.getSession();
+			
+			request.setAttribute("vuelo", session.getAttribute("vuelo"));
+			request.setAttribute("paquete", session.getAttribute("paquete"));
+			request.setAttribute("reserva", session.getAttribute("reserva"));
+			
+			request.getRequestDispatcher("/WEB-INF/Confirmacion.jsp").forward(request, response);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.getSession().invalidate();
+			try {
+				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
+			} catch (ServletException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}	
+	}
+	
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+	{
+		try {
+			doGet(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.getSession().invalidate();
+			try {
+				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
+			} catch (ServletException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+		}
+	}
 }

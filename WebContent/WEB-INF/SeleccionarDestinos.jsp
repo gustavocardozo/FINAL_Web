@@ -86,7 +86,7 @@
 					<input type="hidden" name="destino" id="destino" value="${vuelo.hacia.id}"> <br><br>
 				</c:when>
 				<c:otherwise>
-					<input type="hidden" name="origen" id="destino" value="0"> <br><br>
+					<input type="hidden" name="destino" id="destino" value="0"> <br><br>
 				</c:otherwise>
 			</c:choose>
 			 

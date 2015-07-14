@@ -22,7 +22,7 @@
 <p>
 <span>Seleccione una reserva</span><br>
 	<c:forEach items= "${reservas}" var="reserva">
-		<a href="?idReserva=${reserva.id}"> ${reserva.paquete.nombre} </a><br>
+		<a href="?idReserva=${reserva.id}"> <b>${reserva.id}</b> - ${reserva.vuelo.desde} - ${reserva.vuelo.hacia} </a><br>
 	</c:forEach>
 </p>
 </section>

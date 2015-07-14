@@ -31,7 +31,7 @@ public class SeleccionarDestinos extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 
-			if (! (boolean)((request.getSession().getAttribute("modificacion")==null)?false:request.getSession().getAttribute("modificacion"))) {
+			if (!(boolean)((request.getSession().getAttribute("modificacion")==null)?false:request.getSession().getAttribute("modificacion"))) {
 				request.getSession().invalidate();
 			}
 
@@ -54,6 +54,12 @@ public class SeleccionarDestinos extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().invalidate();
+			try {
+				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
+			} catch (ServletException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
 		}
 	}
 
@@ -90,6 +96,12 @@ public class SeleccionarDestinos extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getSession().invalidate();
+			try {
+				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
+			} catch (ServletException | IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
 		}
 	}
 

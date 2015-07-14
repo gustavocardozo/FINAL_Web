@@ -25,11 +25,12 @@
 	<section class="contenedor">
 
 	<h1>Hubo un error al procesar su solicitud. Intente nuevamente mas</h1>
-	<div id="errores" name="errores" class="error">
-		<c:forEach items="${errores}" var="error">
-			<h1>${error}</h1>
-		</c:forEach>
-	</div>
+<!-- 	<div id="errores" name="errores" class="error"> -->
+<%-- 		<c:forEach items="${errores}" var="error"> --%>
+<%-- 			<h1>${error}</h1> --%>
+<%-- 		</c:forEach> --%>
+<!-- 	</div> -->
+<span>Comuniquese al area de Atención al Cliente 1111-4444</span>
 	<a href="Index">Volver a la home</a>
 </body>
 </html>
