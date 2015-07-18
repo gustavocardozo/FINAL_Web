@@ -1,66 +1,83 @@
-body,html{
-	border:0;
+body, html {
+	border: 0;
 	padding: 0;
 	margin: 0;
 }
 
 /*	HEADER	*/
-header{
+header {
 	
 }
-.menu{
+
+.menu {
 	list-style: none;
-	background: #4f67f9;
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #2e6da4;
 }
-.menu li{
-	display:inline-block;
+
+.logo {
+	background-color: #fff;
+	color: #337ab7;
+	border-color: #2e6da4;
+	font-size: 50px;
+	font-family: "Helvetica", "Open Sans", "arial";
+}
+
+
+.menu li {
+	display: inline-block;
 	padding: 10px;
 }
-.menu li a{
+
+.menu li a {
 	text-decoration: none;
 	color: white;
-	font-family: "Helvetica","Open Sans","arial";
+	font-family: "Helvetica", "Open Sans", "arial";
 	cursor: pointer;
-	
 }
-.menu li a:hover{
-	color:black;
+
+.menu li a:hover {
+	color: black;
 }
 /*	Fin Menu 	*/
-p,h1,h2,h3,a,span{
-	font-family: "Helvetica","Open Sans","arial";
+p, h1, h2, h3, a, span {
+	font-family: "Helvetica", "Open Sans", "arial";
 }
 
-
-.contenedor{
+.contenedor {
 	padding-left: 15px;
-  	padding-right: 15px;
+	padding-right: 15px;
 }
-.error,.error p{
-	color:red;
+
+.error, .error p {
+	color: red;
 }
-.selectorPaquete,.selectorVuelo,.selectorCliente{
-	cursor:pointer;
+
+.selectorPaquete, .selectorVuelo, .selectorCliente {
+	cursor: pointer;
 	font-weight: bold;
 }
-.selectorPaquete:hover,.selectorVuelo:hover,.selectorCliente:hover{
-	color:#4f67f9;
+
+.selectorPaquete:hover, .selectorVuelo:hover, .selectorCliente:hover {
+	color: #4f67f9;
 }
-#tablaPaquetes,#tablaVuelos,#tablaClientes{
+
+#tablaPaquetes, #tablaVuelos, #tablaClientes {
 	width: 500px;
-  display: inline-block;
-  vertical-align: top;
+	display: inline-block;
+	vertical-align: top;
 }
-#detallePaquete,#detalleVuelo,#detalleCliente{
-	  margin-top: 15px;
-  margin-left: 15px;
-  width: 350px;
-  left: 300px;
-  top: 0;
-  display: inline-block;
+
+#detallePaquete, #detalleVuelo, #detalleCliente {
+	margin-top: 15px;
+	margin-left: 15px;
+	width: 350px;
+	left: 300px;
+	top: 0;
+	display: inline-block;
 }
-.invisible{
 
-visibility: hidden;
-
+.invisible {
+	visibility: hidden;
 }

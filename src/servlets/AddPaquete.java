@@ -52,8 +52,9 @@ public class AddPaquete extends HttpServlet {
 				request.getRequestDispatcher("/WEB-INF/SeleccionarPaquete.jsp").forward(request, response);				
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.getSession().invalidate();
+//			request.getSession().invalidate();
 			try {
+				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
 				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
 			} catch (ServletException | IOException e1) {
 				// TODO Auto-generated catch block
@@ -118,6 +119,8 @@ public class AddPaquete extends HttpServlet {
 //					reserva.setVuelo(new Vuelo());
 					reserva.setVuelo(vueloRepository.GetByIdBase(idVuelo));
 					
+					request.getSession().setAttribute("paquete", reserva.getPaquete());
+					request.getSession().setAttribute("vuelo", reserva.getVuelo());
 					request.getSession().setAttribute("reserva", reserva);
 					request.getSession().setAttribute("doGet",true);
 					
@@ -130,8 +133,9 @@ public class AddPaquete extends HttpServlet {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			request.getSession().invalidate();
+//			request.getSession().invalidate();
 			try {
+				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
 				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
 			} catch (ServletException | IOException e1) {
 				// TODO Auto-generated catch block

@@ -5,12 +5,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <title>Seleccion de Paquete</title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$(document).ready(function() {
+		
+		$(".menu").click(function(){
+			
+			if(confirm("Si continua se perderan los datos cargados. ¿Desea continuar?"))
+			{
+				$.ajax({
+
+					type : "GET",
+					url : 'LimpiarSession',
+					async : false,
+					dataType : "html",
+					cache : false,
+					success : function(responseText) {
+					}
+				});
+
+			}
+		});
+		
 		// When the HTML DOM is ready loading, then execute the following function...
 		$('#tablaPaquetes .selectorPaquete').click(function() {
 			$('#idPaquete').val($(this).attr('id'));

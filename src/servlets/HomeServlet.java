@@ -12,13 +12,14 @@ public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public HomeServlet() {
-        
+        super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			if(request.getParameter("borrar") != null){
-				request.getSession().invalidate();
+//				request.getSession().invalidate();
+				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
 			}
 			
 		}catch(Exception e){

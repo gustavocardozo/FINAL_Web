@@ -69,7 +69,7 @@ public class GetCliente extends HttpServlet {
 			detalleCliente.append("Telefono: " + cliente.getTelefono());
 			detalleCliente.append("</span>");
 			detalleCliente.append("<br>");
-			detalleCliente.append("<button type=\"button\" id=\"agregar\">Agregar</button>");
+			detalleCliente.append("<button class=\"btn btn-primary\" type=\"button\" id=\"agregar\">Agregar</button>");
 			
 			
 			

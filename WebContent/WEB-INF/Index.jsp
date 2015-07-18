@@ -9,7 +9,10 @@
 </head>
 <body>
 <header>
-<div><img src="img/icono.png"></div>
+<!--<img src="img/icono.png"> -->
+<div>
+<label class="logo">TRAVEL SYSTEM ®</label>
+</div>
 <ul class="menu">
 <li><a href="Index">Home</a></li>
 <li><a href="SeleccionarDestinos">Agregar reserva</a></li>

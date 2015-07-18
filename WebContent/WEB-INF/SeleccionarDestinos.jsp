@@ -5,6 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <title>Seleccionar Destinos</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -18,6 +24,23 @@
 		// 			$('#destino').val($(this).val());
 		// 		});
 
+		$(".menu").click(function(){
+			
+			if(confirm("Si continua se perderan los datos cargados. ¿Desea continuar?"))
+			{
+				$.ajax({
+
+					type : "GET",
+					url : 'LimpiarSession',
+					async : false,
+					dataType : "html",
+					cache : false,
+					success : function(responseText) {
+					}
+				});
+			}
+		});
+		
 		$("#selectOrigen").change(function() {
 			$('#origen').val($(this).children(":selected").attr("id"));
 		});
@@ -55,7 +78,7 @@
 
 	<form action="SeleccionarDestinos" method="post">
 		<h3>Origen:</h3>
-		<select id="selectOrigen">
+		<select id="selectOrigen" class="form-control">
 			<c:forEach items="${destinos}" var="destino">
 				<option id="${destino.id}" value="${destino.id}">${destino.nombre}</option>
 			</c:forEach>
@@ -74,7 +97,7 @@
 				</c:otherwise>
 			</c:choose>
 		<h3>Destino:</h3>
-		<select id="selectDestino">
+		<select id="selectDestino" class="form-control">
 			<c:forEach items="${destinos}" var="destino">
 				<option id="${destino.id}" value="${destino.id}">${destino.nombre}</option>
 			</c:forEach>
@@ -90,7 +113,7 @@
 				</c:otherwise>
 			</c:choose>
 			 
-			<input type="submit" name="siguiente" value="Siguiente">
+			<input type="submit" class="btn btn-primary" name="siguiente" value="Siguiente">
 	</form>
 	</section>
 </body>

@@ -42,8 +42,8 @@ public class AddClientes extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.getSession().invalidate();
 			try {
+				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
 				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
 			} catch (ServletException | IOException e1) {
 				// TODO Auto-generated catch block
@@ -111,8 +111,8 @@ public class AddClientes extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.getSession().invalidate();
 			try {
+				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
 				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
 			} catch (ServletException | IOException e1) {
 				// TODO Auto-generated catch block

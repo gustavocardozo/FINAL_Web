@@ -6,11 +6,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Seleccion de Clientes</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$(document).ready(function() {
 		// When the HTML DOM is ready loading, then execute the following function...
+		
+		$(".menu").click(function(){	
+			if(confirm("Si continua se perderan los datos cargados. ¿Desea continuar?"))
+			{
+				$.ajax({
+
+					type : "GET",
+					url : 'LimpiarSession',
+					async : false,
+					dataType : "html",
+					cache : false,
+					success : function(responseText) {
+					}
+				});
+
+			}
+		});
 		$('.selectorCliente').click(function() {
 			$('#idCliente').val($(this).attr('id'));
 // 			alert($(this).attr('id'));
@@ -69,7 +92,7 @@
 							success :
 								function(responseJson) {
 								$('.delete').remove();
-								 var $table = $('<table class="delete"><thead><td>Nombre</td><td>Apellido</td><td>DNI</td></thead>').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
+								 var $table = $('<table class="delete table"><thead><td>Nombre</td><td>Apellido</td><td>DNI</td></thead>').appendTo($('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
 						            $.each(responseJson, function(index, cliente) {    // Iterate over the JSON array.
 						                $('<tr value="'+cliente.id+'">').appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
 						                    .append($('<td>').text(cliente.nombre))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
@@ -77,7 +100,7 @@
 						                    .append($('<td>').text(cliente.dni))    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
 						                    .append($('<td id="append'+cliente.id+'">'))
 						                    .append($('<td class="invisible">').text(cliente.id))
-						                    $('<input type="button" id="eliminar'+cliente.id+'" value="Eliminar"></input>').appendTo($("#append"+cliente.id+""))
+						                    $('<input type="button" class="btn btn-primary" id="eliminar'+cliente.id+'" value="Eliminar"></input>').appendTo($("#append"+cliente.id+""))
 						                    $('#eliminar'+cliente.id).click(function(){
 // 								            	alert($(this).closest('tr').children('td.invisible').text());						            
 						                    	$.ajax({
@@ -157,7 +180,7 @@
 			<h3>Clientes seleccionados</h3>
 			<div id="clientesSeleccionados">
 			<c:if test="${clientesAgregados!=null}">
-				<table class="delete" id="clientesAgregados">
+				<table class="delete table" id="clientesAgregados">
 					<thead>
 						<td>Nombre</td>
 						<td>Apellido</td>
@@ -169,15 +192,15 @@
 								<td>${cliente.nombre}</td>
 								<td>${cliente.apellido}</td>
 								<td>${cliente.dni}</td>
+								<td><input type="button" class="btn btn-primary" id="eliminar${cliente.id}" value="Eliminar"></td>
 								<td class="invisible">${cliente.id}</td>
-								<td><input type="button" id="eliminar${cliente.id}" value="Eliminar"></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</c:if>
 			</div>
-			<input type="submit" name="siguiente" value="Siguiente">
+			<input type="submit" class="btn btn-primary" name="siguiente" value="Siguiente">
 		</form>
 	</div>
 
