@@ -36,7 +36,7 @@ public class SuccessAddReservasServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
+				LimpiarSession.deleteSession(request);
 				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
 			} catch (ServletException | IOException e1) {
 				// TODO Auto-generated catch block
@@ -53,7 +53,7 @@ public class SuccessAddReservasServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
+				LimpiarSession.deleteSession(request);
 				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
 			} catch (ServletException | IOException e1) {
 				// TODO Auto-generated catch block

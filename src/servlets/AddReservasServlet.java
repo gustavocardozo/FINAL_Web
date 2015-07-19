@@ -1,6 +1,5 @@
 package servlets;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.Cliente;
 import model.Reserva;
 import repository.ReservaRepository;
 
@@ -43,7 +41,7 @@ public class AddReservasServlet extends HttpServlet {
 				}
 				
 				
-				session.invalidate();
+				LimpiarSession.deleteSession(request);
 				
 				request.getRequestDispatcher("/WEB-INF/Felicidades.jsp").forward(request, response);
 //			}
@@ -63,7 +61,7 @@ public class AddReservasServlet extends HttpServlet {
 			e.printStackTrace();
 //			request.getSession().invalidate();
 			try {
-				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
+				LimpiarSession.deleteSession(request);
 				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
 			} catch (ServletException | IOException e1) {
 				// TODO Auto-generated catch block

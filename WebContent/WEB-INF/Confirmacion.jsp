@@ -3,35 +3,20 @@
 <%@page import="java.util.*"%>
 <%@ page import="model.Cliente"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="/WEB-INF/MasterPage.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Agregar reserva - Travel Sistems</title>
-<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<title>Confirmación</title>
 </head>
-
 <body>
-	<header>
-	<div>
-		<img src="img/icono.png">
-	</div>
-	<ul class="menu">
-		<li><a href="Index">Home</a></li>
-		<li><a href="SeleccionarDestinos">Agregar reserva</a></li>
-		<li><a href="UpdateReserva">Modificar reserva</a></li>
-	</ul>
-	</header>
 	<section class="contenedor">
-	<h3>Desea confirmar la reserva?</h3>
-	<span>Recuerde que si no confirma, se perderán todos los datos
-		guardados</span>
-	<br>
 	<form action="AgregarReserva" method="post">
 		<p>
 			<b>CLIENTES:</b>
 		</p>
-		<table class="delete" id="clientesAgregados">
+		<table class="delete table" id="clientesAgregados">
 			<thead>
 				<td>Nombre</td>
 				<td>Apellido</td>
@@ -52,24 +37,30 @@
 			<b>VUELO:</b>
 		</p>
 		<ul id="tablaVuelos" class="itemMayor">
-<%-- 			<c:forEach items="${vuelos}" var="vuelo"> --%>
-				<li class="item" id="${reserva.vuelo.id}">
-					${reserva.vuelo.desde.descripcion} - ${reserva.vuelo.hacia.descripcion}
-				</li>
-<%-- 			</c:forEach> --%>
+			<li class="item" id="${reserva.vuelo.id}">
+				${reserva.vuelo.desde.descripcion} -
+				${reserva.vuelo.hacia.descripcion}</li>
 		</ul>
-<!-- 		 &&  -->
-		<c:if test="${reserva.paquete.id != 0 && reserva.paquete.id!='' && reserva.paquete.id!=null}">
+		<c:if
+			test="${reserva.paquete.id != 0 && reserva.paquete.id!='' && reserva.paquete.id!=null}">
 			<p>
 				<b>PAQUETE:</b>
 			</p>
 			<ul id="tablaPaquetes" class="itemMayor">
-					<li class="item">${reserva.paquete.id} - ${reserva.paquete.nombre}</li>
+				<li class="item">${reserva.paquete.id}-
+					${reserva.paquete.nombre}</li>
 			</ul>
 		</c:if>
 
-		<p>Total:<b>$ ${reserva.total} </b><br></p> <input type="submit" value="Confirmar"> 
-			<a href="Index?borrar=true"><input type="button" name="Cancelar" value="Cancelar"></a>
+		<p>
+			<b>TOTAL:$${reserva.total}</b><br>
+		</p>
+		<h3>Desea confirmar la reserva?</h3>
+		<span class="label label-warning">Recuerde que si no confirma,
+			se perderán todos los datos cargados</span> <br><br><input
+			class="btn btn-primary" type="submit" value="Confirmar"> <a
+			href="Index?borrar=true"><input class="btn btn-primary"
+			type="button" name="Cancelar" value="Cancelar"></a>
 	</form>
 	</section>
 </body>

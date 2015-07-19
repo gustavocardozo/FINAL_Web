@@ -27,14 +27,16 @@ public class LimpiarSession extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			request.getSession().setAttribute("vuelo", null);
-			request.getSession().setAttribute("paquete", null);
-			request.getSession().setAttribute("clientesAgregados", null);
-			request.getSession().setAttribute("reserva", null);
-			request.getSession().setAttribute("destinos", null);
-			request.getSession().setAttribute("clientes", null);
-			request.getSession().setAttribute("doGet", null);
-			request.getSession().setAttribute("modificacion",null);
+//			request.getSession().setAttribute("vuelo", null);
+//			request.getSession().setAttribute("paquete", null);
+//			request.getSession().setAttribute("clientesAgregados", null);
+//			request.getSession().setAttribute("reserva", null);
+//			request.getSession().setAttribute("destinos", null);
+//			request.getSession().setAttribute("clientes", null);
+//			request.getSession().setAttribute("doGet", null);
+//			request.getSession().setAttribute("modificacion",null);
+//			request.getSession().setAttribute("errores",null);
+			LimpiarSession.deleteSession(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,5 +49,23 @@ public class LimpiarSession extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	
+	public static void deleteSession(HttpServletRequest request)
+	{
+		try {
+			request.getSession().setAttribute("vuelo", null);
+			request.getSession().setAttribute("paquete", null);
+			request.getSession().setAttribute("clientesAgregados", null);
+			request.getSession().setAttribute("reserva", null);
+			request.getSession().setAttribute("destinos", null);
+			request.getSession().setAttribute("clientes", null);
+			request.getSession().setAttribute("doGet", null);
+			request.getSession().setAttribute("modificacion",null);
+			request.getSession().setAttribute("errores",null);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+	}
 }

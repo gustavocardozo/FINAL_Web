@@ -32,18 +32,22 @@ public class AddClientes extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			clienteRepository = new ClienteRepository();
-			reserva = (Reserva) request.getAttribute("reserva");
-			clientes = clienteRepository.ListadoBase();
+			if (request.getSession().getAttribute("usuario") != null) {
+				clienteRepository = new ClienteRepository();
+				reserva = (Reserva) request.getAttribute("reserva");
+				clientes = clienteRepository.ListadoBase();
 
-			request.getSession().setAttribute("clientes", clientes);
-			request.setAttribute("clientes", clientes);
-			request.getRequestDispatcher("/WEB-INF/SeleccionarClientes.jsp").forward(request, response);
-
+				request.getSession().setAttribute("clientes", clientes);
+				request.setAttribute("clientes", clientes);
+				request.setAttribute("usuario", request.getSession().getAttribute("usuario"));
+				request.getRequestDispatcher("/WEB-INF/SeleccionarClientes.jsp").forward(request, response);
+			} else {
+				request.getRequestDispatcher("/LogIn").forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
+				LimpiarSession.deleteSession(request);
 				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
 			} catch (ServletException | IOException e1) {
 				// TODO Auto-generated catch block
@@ -59,60 +63,63 @@ public class AddClientes extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			ArrayList<String> errores = new ArrayList<String>();
-			if ((Boolean) request.getSession().getAttribute("doGet")) {
-				request.getSession().setAttribute("doGet", false);
-				doGet(request, response);
-			} else {
+			if (request.getSession().getAttribute("usuario") != null) {
+				ArrayList<String> errores = new ArrayList<String>();
+				if ((Boolean) request.getSession().getAttribute("doGet")) {
+					request.getSession().setAttribute("doGet", false);
+					doGet(request, response);
+				} else {
 
-				HttpSession session = request.getSession();
-				ReservaRepository reservaRepository = new ReservaRepository();
+					HttpSession session = request.getSession();
+					ReservaRepository reservaRepository = new ReservaRepository();
 
-				Reserva reserva = (session.getAttribute("reserva") == null) ? new Reserva()
-						: (Reserva) session.getAttribute("reserva");
-				ArrayList<Cliente> clientesAgregados = (session.getAttribute("clientesAgregados") == null)
-						? new ArrayList<Cliente>() : (ArrayList<Cliente>) session.getAttribute("clientesAgregados");
-				reserva.setClientes(clientesAgregados);
-				
-				if(reserva.getClientes().size() <= 0){
-					
-					errores.add("Debe seleccionar al menos un cliente.");
-					request.getSession().setAttribute("errores", errores);
-					request.setAttribute("clientes", request.getSession().getAttribute("clientes"));
-					request.setAttribute("clientes", request.getSession().getAttribute("clientesAgregados"));
-					request.setAttribute("errores", errores);
-					request.getRequestDispatcher("/WEB-INF/SeleccionarClientes.jsp").forward(request, response);
-				}
-				else
-				{
-					Integer disponibilidad = reserva.getVuelo().getDisponibilidad();
-					
-					if((boolean)((request.getSession().getAttribute("modificacion")==null)?false:request.getSession().getAttribute("modificacion")))
-					{
-						disponibilidad += Integer.parseInt((request.getSession().getAttribute("cantidadVieja").toString()==null)?"0":request.getSession().getAttribute("cantidadVieja").toString());
-					}
-					if ( disponibilidad >= reserva.getClientes().size()) {
-						reserva.setTotal(reserva.getPaquete().getPrecio() * reserva.getClientes().size()
-								+ reserva.getClientes().size() * reserva.getVuelo().getPrecio());
-						session.setAttribute("reserva", reserva);
+					Reserva reserva = (session.getAttribute("reserva") == null) ? new Reserva()
+							: (Reserva) session.getAttribute("reserva");
+					ArrayList<Cliente> clientesAgregados = (session.getAttribute("clientesAgregados") == null)
+							? new ArrayList<Cliente>() : (ArrayList<Cliente>) session.getAttribute("clientesAgregados");
+					reserva.setClientes(clientesAgregados);
 
-						request.getRequestDispatcher("SuccessAddReservas").forward(request, response);
-					} else {
+					if (reserva.getClientes().size() <= 0) {
 
-
-						errores.add("No hay disponibilidad en el vuelo. Seleccione otro.");
+						errores.add("Debe seleccionar al menos un cliente.");
+						request.getSession().setAttribute("errores", errores);
 						request.setAttribute("clientes", request.getSession().getAttribute("clientes"));
 						request.setAttribute("clientes", request.getSession().getAttribute("clientesAgregados"));
 						request.setAttribute("errores", errores);
 						request.getRequestDispatcher("/WEB-INF/SeleccionarClientes.jsp").forward(request, response);
+					} else {
+						Integer disponibilidad = reserva.getVuelo().getDisponibilidad();
+
+						if ((boolean) ((request.getSession().getAttribute("modificacion") == null) ? false
+								: request.getSession().getAttribute("modificacion"))) {
+							disponibilidad += Integer
+									.parseInt((request.getSession().getAttribute("cantidadVieja").toString() == null)
+											? "0" : request.getSession().getAttribute("cantidadVieja").toString());
+						}
+						if (disponibilidad >= reserva.getClientes().size()) {
+							reserva.setTotal(reserva.getPaquete().getPrecio() * reserva.getClientes().size()
+									+ reserva.getClientes().size() * reserva.getVuelo().getPrecio());
+							session.setAttribute("reserva", reserva);
+
+							request.getRequestDispatcher("SuccessAddReservas").forward(request, response);
+						} else {
+
+							errores.add("No hay disponibilidad en el vuelo. Seleccione otro.");
+							request.setAttribute("clientes", request.getSession().getAttribute("clientes"));
+							request.setAttribute("clientes", request.getSession().getAttribute("clientesAgregados"));
+							request.setAttribute("errores", errores);
+							request.getRequestDispatcher("/WEB-INF/SeleccionarClientes.jsp").forward(request, response);
+						}
 					}
 				}
+			} else {
+				request.getRequestDispatcher("/LogIn").forward(request, response);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
+				LimpiarSession.deleteSession(request);
 				request.getRequestDispatcher("/WEB-INF/Error.jsp").forward(request, response);
 			} catch (ServletException | IOException e1) {
 				// TODO Auto-generated catch block

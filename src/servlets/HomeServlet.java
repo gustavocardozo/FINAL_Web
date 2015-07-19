@@ -17,10 +17,17 @@ public class HomeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
+		if(request.getSession().getAttribute("usuario")!=null){
 			if(request.getParameter("borrar") != null){
 //				request.getSession().invalidate();
-				request.getRequestDispatcher("/LimpiarSession").forward(request, response);
+				LimpiarSession.deleteSession(request);
 			}
+			request.setAttribute("usuario", request.getSession().getAttribute("usuario"));
+		}
+		else
+		{
+			request.getRequestDispatcher("/LogIn").forward(request, response);
+		}
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -30,6 +37,12 @@ public class HomeServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			doGet(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

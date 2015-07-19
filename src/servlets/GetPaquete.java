@@ -51,7 +51,7 @@ public class GetPaquete extends HttpServlet {
 			detallePaquete.append("Hacia: " + paquete.getHacia().getNombre());
 			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<button type=\"button\" id=\"eliminarPaquete\">Eliminar paquete</button>");
+			detallePaquete.append("<button class=\"btn btn-primary\" type=\"button\" id=\"eliminarPaquete\">Eliminar paquete</button>");
 
 			response.setContentType("text/html");
 			response.getWriter().write(detallePaquete.toString());

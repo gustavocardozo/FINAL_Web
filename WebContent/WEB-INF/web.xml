@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>FINAL_Web</display-name>
   <welcome-file-list>
-    <welcome-file>Index</welcome-file>
+    <welcome-file>LogIn</welcome-file>
   </welcome-file-list>
   <servlet>
     <servlet-name>HomeServlet</servlet-name>
@@ -91,5 +91,13 @@
   <servlet-mapping>
     <servlet-name>SeleccionarDestinos</servlet-name>
     <url-pattern>/SeleccionarDestinos</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogIn</servlet-name>
+    <servlet-class>servlets.LogIn</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogIn</servlet-name>
+    <url-pattern>/LogIn</url-pattern>
   </servlet-mapping>
 </web-app>

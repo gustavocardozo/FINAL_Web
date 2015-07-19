@@ -65,7 +65,7 @@ public class GetVuelo extends HttpServlet {
 			detallePaquete.append("Disponibilidad: "+ vuelo.getDisponibilidad());
 			detallePaquete.append("</span>");
 			detallePaquete.append("<br>");
-			detallePaquete.append("<button type=\"button\" id=\"eliminarVuelo\">Eliminar vuelo</button>");
+			detallePaquete.append("<button class=\"btn btn-primary\" type=\"button\" id=\"eliminarVuelo\">Eliminar vuelo</button>");
 
 			response.setContentType("text/html");
 			response.getWriter().write(detallePaquete.toString());
