@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -45,7 +44,7 @@
 	</div>
 	<div id="logIn">
 		<c:if test="${usuario != null}">
-			<label class="label label-success">${usuario}</label><a class="btn btn-default" href="LogIn?logOut=true">LogOut</a>
+			<label class="label label-success">${usuario}</label><a class="btn btn-default" href="LogIn?logOut=true">Salir</a>
 		</c:if>
 	</div>
 	<ul class="menu">
@@ -54,11 +53,14 @@
 		<li><a href="UpdateReserva">Modificar reserva</a></li>
 	</ul>
 	</header>
+	<section class="contenedor">
 	<div id="errores" name="errores" class="error">
 		<c:forEach items="${errores}" var="error">
 			<p>${error}</p>
 		</c:forEach>
 	</div>
 	<input id="borrarSession" type="hidden" value="false">
+	</section>
+	
 </body>
 </html>

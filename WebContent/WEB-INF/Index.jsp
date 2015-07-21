@@ -8,5 +8,17 @@
 <title>Sistema de vuelos</title>
 </head>
 <body>
+	<div id="imageneshome">
+		<div class="opcionHome"><a href="SeleccionarDestinos">
+		<img src="img/p_3ed356b53797f474d0ebdcf7bb92f5ae.jpg">
+		<div>Agregar reserva</div>
+		</a>
+		</div>
+		<div class="opcionHome"><a href="UpdateReserva">
+		<img src="img/img-home.jpg">
+		<div>Modificar reserva</div>
+		</a>
+		</div>
+	</div>
 </body>
 </html>

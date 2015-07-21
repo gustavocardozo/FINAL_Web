@@ -122,7 +122,7 @@
 																										'.delete')
 																										.remove();
 																								var $table = $(
-																										'<table class="delete table"><thead><td>Nombre</td><td>Apellido</td><td>DNI</td></thead>')
+																										'<table class="delete table table-striped"><thead><th>Nombre</th><th>Apellido</th><th>DNI</th></thead>')
 																										.appendTo(
 																												$('#clientesSeleccionados')); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
 																								$
@@ -228,42 +228,48 @@
 </head>
 <body>
 	<section class="contenedor">
-	<h3>Clientes</h3>
-	<p>Nombre</p>
-	<ul id="tablaClientes" class="itemMayor">
-		<c:forEach items="${clientes}" var="cliente">
-			<li class="item">${cliente.nombre}<a id="${cliente.id}"
-				class="selectorCliente">[+Ver más]</a></li>
-		</c:forEach>
-	</ul>
-	<input type="hidden" id="idCliente" name="idCliente" value="">
-	<div id="detalleCliente"></div>
-
-	<div id="seleccionCliente">
+	<div class="panel panel-default">
+		<div class="panel-heading"><h3 class="panel-title">Clientes</h3></div>
+		<div class="panel-body">
+			<ul id="tablaClientes" class="itemMayor">
+				<c:forEach items="${clientes}" var="cliente">
+					<li class="item">${cliente.nombre}<a id="${cliente.id}"
+						class="selectorCliente"> [+Ver más]</a></li>
+				</c:forEach>
+			</ul>
+			<input type="hidden" id="idCliente" name="idCliente" value="">
+			<div id="detalleCliente"></div>
+		</div>
+	</div>
+			<div id="seleccionCliente">
 		<form action="SeleccionarClientes" method="post">
-			<h3>Clientes seleccionados</h3>
-			<div id="clientesSeleccionados">
-				<c:if test="${clientesAgregados!=null}">
-					<table class="delete table" id="clientesAgregados">
-						<thead>
-							<td>Nombre</td>
-							<td>Apellido</td>
-							<td>DNI</td>
-						</thead>
-						<tbody>
-							<c:forEach items="${clientesAgregados}" var="cliente">
-								<tr>
-									<td>${cliente.nombre}</td>
-									<td>${cliente.apellido}</td>
-									<td>${cliente.dni}</td>
-									<td><input type="button" class="btn btn-primary"
-										id="eliminar${cliente.id}" value="Eliminar"></td>
-									<td class="invisible">${cliente.id}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</c:if>
+			<div class="panel panel-default">
+			<div class="panel-heading"><h3 class="panel-title">Clientes seleccionados</h3></div>
+			<div class="panel-body">
+				<div id="clientesSeleccionados">
+					<c:if test="${clientesAgregados!=null}">
+						<table class="delete table table-striped" id="clientesAgregados">
+							<thead>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>DNI</th>
+							</thead>
+							<tbody>
+								<c:forEach items="${clientesAgregados}" var="cliente">
+									<tr>
+										<td>${cliente.nombre}</td>
+										<td>${cliente.apellido}</td>
+										<td>${cliente.dni}</td>
+										<td><input type="button" class="btn btn-primary"
+											id="eliminar${cliente.id}" value="Eliminar"></td>
+										<td class="invisible">${cliente.id}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</c:if>
+				</div>
+			</div>
 			</div>
 			<input type="submit" class="btn btn-primary" name="siguiente"
 				value="Siguiente">

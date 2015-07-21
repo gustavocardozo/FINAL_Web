@@ -34,23 +34,26 @@ public class GetPaquete extends HttpServlet {
 			Paquete paquete = paqueteRepository.GetByIdBase(idPaquete);
 			StringBuilder detallePaquete = new StringBuilder();
 
-			detallePaquete.append("<p><b>Paquete seleccionado</b></p>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Descripcion: " + paquete.getNombre());
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Precio: " + paquete.getPrecio());
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Desde: " + paquete.getDesde().getNombre());
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Hacia: " + paquete.getHacia().getNombre());
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
+			detallePaquete.append("<p><b>Paquete seleccionado</b></p><table class='table table-striped'>");
+			
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Descripcion </td><td>" + paquete.getNombre());
+			detallePaquete.append("</td></tr>");
+			
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Precio</td><td>" + paquete.getPrecio());
+			detallePaquete.append("</td></tr>");
+
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Desde</td><td>" + paquete.getDesde().getNombre());
+			detallePaquete.append("</td></tr>");
+			
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Hacia</td><td>" + paquete.getHacia().getNombre());
+			detallePaquete.append("</td></tr>");
+			
+			detallePaquete.append("</table>");
+			
 			detallePaquete.append("<button class=\"btn btn-primary\" type=\"button\" id=\"eliminarPaquete\">Eliminar paquete</button>");
 
 			response.setContentType("text/html");

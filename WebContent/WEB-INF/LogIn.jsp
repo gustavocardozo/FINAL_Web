@@ -10,7 +10,7 @@
 </head>
 <body>
 	<section class="contenedor">
-	<form action="LogIn" method="post">
+	<form id="formLogin" class="formulario" action="LogIn" method="post">
 		<label for="user">Usuario: </label><input type="text" id="user"
 			name="user"><br> <label for="pass">Contraseña: </label><input
 			type="password" id="pass" name="pass"><br> <br> <input

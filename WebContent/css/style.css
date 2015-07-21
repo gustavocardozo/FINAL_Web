@@ -6,7 +6,7 @@ body, html {
 
 /*	HEADER	*/
 header {
-	
+	margin-bottom: 2%;
 }
 
 .menu {
@@ -15,12 +15,22 @@ header {
 	background-color: #337ab7;
 	border-color: #2e6da4;
 }
-
+#logo{
+	width: 49%;
+  	display: inline-block;
+}
+#logIn{
+	width: 49%;
+  	display: inline-block;
+ 	text-align: right;
+}
 .logo {
 	background-color: #fff;
 	color: #337ab7;
 	border-color: #2e6da4;
 	font-size: 50px;
+	margin-left: 10px;
+  	margin-top: 10px;
 	font-family: "Helvetica", "Open Sans", "arial";
 }
 
@@ -46,8 +56,8 @@ p, h1, h2, h3, a, span {
 }
 
 .contenedor {
-	padding-left: 15px;
-	padding-right: 15px;
+	padding-left: 5%;
+  	padding-right: 5%;
 }
 
 .error, .error p {
@@ -64,7 +74,7 @@ p, h1, h2, h3, a, span {
 }
 
 #tablaPaquetes, #tablaVuelos, #tablaClientes {
-	width: 500px;
+	width: 50%;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -72,7 +82,7 @@ p, h1, h2, h3, a, span {
 #detallePaquete, #detalleVuelo, #detalleCliente {
 	margin-top: 15px;
 	margin-left: 15px;
-	width: 350px;
+	width: 35%;
 	left: 300px;
 	top: 0;
 	display: inline-block;
@@ -84,4 +94,57 @@ p, h1, h2, h3, a, span {
 
 .label{
 	font-size: 20px;
+}
+
+#formLogin label{
+	display:block!important;
+	
+}
+.formulario{
+	width: 50%;
+	  line-height: 25px;
+}
+.opcionHome{
+	width: 45%;
+	  display: inline-block;
+	    border: 8px solid transparent;
+}
+.opcionHome:hover{
+	  border: 2px solid;
+}
+.opcionHome a:hover{
+	text-decoration: none!important;
+}
+.opcionHome a img{
+	width: 100%;
+}
+.opcionHome a div{
+  color: #fff;
+  background-color: #337ab7;
+  padding: 5px;
+  text-decoration: none;
+  font-size: large;
+}
+#imageneshome{
+	text-align: center;
+}
+.formConfirmar{
+	width: 70%;
+  	line-height: 30px;
+}
+footer{
+	  padding: 7px;
+	  text-align: center;
+	  font-weight: bold;
+	  margin-top: 25px;
+	  color: white;
+	  background-color: #337ab7;
+}
+.precio{
+	  margin-left: 15px;
+  padding: 10px;
+  color: green;
+  font-weight: bold;
+  font-style: italic;
+  font-size: x-large;
 }

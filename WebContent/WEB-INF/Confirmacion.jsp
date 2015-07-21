@@ -12,15 +12,15 @@
 </head>
 <body>
 	<section class="contenedor">
-	<form action="AgregarReserva" method="post">
+	<form class="formConfirmar" action="AgregarReserva" method="post">
 		<p>
-			<b>CLIENTES:</b>
+			<span class="label label-default">Clientes</span>
 		</p>
-		<table class="delete table" id="clientesAgregados">
+		<table class="delete table table-striped" id="clientesAgregados">
 			<thead>
-				<td>Nombre</td>
-				<td>Apellido</td>
-				<td>DNI</td>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>DNI</th>
 			</thead>
 			<tbody>
 				<c:forEach items="${reserva.clientes}" var="cliente">
@@ -34,7 +34,7 @@
 			</tbody>
 		</table>
 		<p>
-			<b>VUELO:</b>
+			<span class="label label-default">Vuelo</span>
 		</p>
 		<ul id="tablaVuelos" class="itemMayor">
 			<li class="item" id="${reserva.vuelo.id}">
@@ -44,7 +44,7 @@
 		<c:if
 			test="${reserva.paquete.id != 0 && reserva.paquete.id!='' && reserva.paquete.id!=null}">
 			<p>
-				<b>PAQUETE:</b>
+				<span class="label label-default">Paquete</span>
 			</p>
 			<ul id="tablaPaquetes" class="itemMayor">
 				<li class="item">${reserva.paquete.id}-
@@ -52,15 +52,16 @@
 			</ul>
 		</c:if>
 
-		<p>
-			<b>TOTAL:$${reserva.total}</b><br>
-		</p>
+		<p><span class="label label-default">Total</span></p>
+		<h4 class="precio">$ ${reserva.total}</h4>
 		<h3>Desea confirmar la reserva?</h3>
-		<span class="label label-warning">Recuerde que si no confirma,
-			se perderán todos los datos cargados</span> <br><br><input
-			class="btn btn-primary" type="submit" value="Confirmar"> <a
-			href="Index?borrar=true"><input class="btn btn-primary"
-			type="button" name="Cancelar" value="Cancelar"></a>
+		<h5>
+			<span class="error">Recuerde que si no confirma, se perderán todos los datos cargados</span> 
+		</h5>
+		<input class="btn btn-primary" type="submit" value="Confirmar"> 
+		<a href="Index?borrar=true">
+			<input class="btn btn-primary" type="button" name="Cancelar" value="Cancelar">
+		</a>
 	</form>
 	</section>
 </body>

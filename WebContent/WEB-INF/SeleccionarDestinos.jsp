@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Seleccionar destinos</title>
 <script>
 	$(document).ready(function() {
 		// When the HTML DOM is ready loading, then execute the following function...
@@ -15,7 +15,7 @@
 		// 		$('#selectDestino').click(function() {
 		// 			$('#destino').val($(this).val());
 		// 		});
-		$("#borrarSession").val("true");
+		//$("#borrarSession").val("true");
 
 		// 		$(".menu").click(function(){
 
@@ -36,9 +36,11 @@
 
 		$("#selectOrigen").change(function() {
 			$('#origen').val($(this).children(":selected").attr("id"));
+			$("#borrarSession").val("true");
 		});
 		$("#selectDestino").change(function() {
 			$('#destino').val($(this).children(":selected").attr("id"));
+			$("#borrarSession").val("true");
 		});
 
 		$(function() {
@@ -53,7 +55,7 @@
 </head>
 <body>
 	<section class="contenedor">
-	<form action="SeleccionarDestinos" method="post">
+	<form class="formulario" action="SeleccionarDestinos" method="post">
 		<h3>Origen:</h3>
 		<select id="selectOrigen" class="form-control">
 			<c:forEach items="${destinos}" var="destino">

@@ -171,38 +171,39 @@
 	<section class="contenedor">
 	<div id="seleccionPaquete">
 		<form action="SeleccionarPaquete" method="post">
-			<div>
-				<h3>Paquetes</h3>
-				<p>Descripción</p>
-				<ul id="tablaPaquetes" class="itemMayor">
-					<c:forEach items="${paquetes}" var="paquete">
-						<li class="item">${paquete.nombre}<a id="${paquete.id}"
-							class="selectorPaquete">[+Agregar]</a></li>
-					</c:forEach>
-				</ul>
-
-				<c:choose>
-					<c:when test="${paquete.id!=null}">
-						<input type="hidden" id="idPaquete" name="idPaquete"
-							value="${paquete.id}">
-					</c:when>
-					<c:otherwise>
-						<input type="hidden" id="idPaquete" name="idPaquete" value="0">
-					</c:otherwise>
-				</c:choose>
-
-				<div id="detallePaquete"></div>
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3 class="panel-title">Paquetes</h3></div>
+				<div class="panel-body">
+						<ul id="tablaPaquetes" class="itemMayor">
+							<c:forEach items="${paquetes}" var="paquete">
+								<li class="item">${paquete.nombre } <a id="${paquete.id}"
+									class="selectorPaquete">[+Seleccionar]</a></li>
+							</c:forEach>
+						</ul>
+					
+					<c:choose>
+						<c:when test="${paquete.id!=null}">
+							<input type="hidden" id="idPaquete" name="idPaquete"
+								value="${paquete.id}">
+						</c:when>
+						<c:otherwise>
+							<input type="hidden" id="idPaquete" name="idPaquete" value="0">
+						</c:otherwise>
+					</c:choose>
+	
+					<div id="detallePaquete"></div>
+				</div>
 			</div>
-			<div>
-				<h3>Vuelos</h3>
-				<p>Descripción</p>
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3 class="panel-title">Vuelos</h3></div>
+				<div class="panel-body">
 				<ul id="tablaVuelos" class="itemMayor">
 					<c:forEach items="${vuelos}" var="vuelo">
 
 						<li class="item" id="${vuelo.id}">${vuelo.desde.nombre}-
 							</td>
-						<td class="item" id="${vuelo.id}">${vuelo.hacia.nombre}<a
-								id="${vuelo.id}" class="selectorVuelo">[+Agregar]</a>
+						<td class="item" id="${vuelo.id}">${vuelo.hacia.nombre} <a
+								id="${vuelo.id}" class="selectorVuelo">[+Seleccionar]</a>
 						</li>
 
 					</c:forEach>
@@ -217,10 +218,13 @@
 						<input type="hidden" id="idVuelo" name="idVuelo" value="0">
 					</c:otherwise>
 				</c:choose>
+				</div>
 			</div>
 			<input class="btn btn-primary" type="submit" id="submitPaquetes" name="siguiente"
-				value="Siguiente"> <a href="SeleccionarDestinos"
-				class="invisible" id="volver" value="Volver">Volver</a>
+				value="Siguiente"> 
+			<a href="SeleccionarDestinos" class="invisible" id="volver" value="Volver">
+				<button type="button" class="btn btn-primary">Volver</button>
+			</a>
 		</form>
 	</div>
 	</section>

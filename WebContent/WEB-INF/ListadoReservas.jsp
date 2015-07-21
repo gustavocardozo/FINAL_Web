@@ -10,13 +10,14 @@
 </head>
 <body>
 <section class="contenedor">
-<h2 class="label label-success">Reservas disponibles</h2><br><br>
-<p>
-<span>Seleccione una reserva</span><br>
-	<c:forEach items= "${reservas}" var="reserva">
-		<a href="?idReserva=${reserva.id}"> <b>${reserva.id}</b> - ${reserva.vuelo.desde.nombre} - ${reserva.vuelo.hacia.nombre} </a><br>
-	</c:forEach>
-</p>
+	<div class="formulario">
+		<p><span class="label label-default">Reservas disponibles</span></p>
+		<div class="list-group">
+		<c:forEach items= "${reservas}" var="reserva">
+			<a class="list-group-item" href="?idReserva=${reserva.id}"> <b>${reserva.id}</b> - ${reserva.vuelo.desde.nombre} - ${reserva.vuelo.hacia.nombre} </a>
+		</c:forEach>
+		</div>
+	</div>
 </section>
 </body>
 </html>

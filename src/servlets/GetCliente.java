@@ -41,34 +41,34 @@ public class GetCliente extends HttpServlet {
 
 			StringBuilder detalleCliente = new StringBuilder();
 
-			detalleCliente.append("<span>");
-			detalleCliente.append("Nombre: " + cliente.getNombre());
-			detalleCliente.append("</span>");
-			detalleCliente.append("<br>");
-			detalleCliente.append("<span>");
-			detalleCliente.append("Apellido:" + cliente.getApellido());
-			detalleCliente.append("</span>");
-			detalleCliente.append("<br>");
-			detalleCliente.append("<span>");
-			detalleCliente.append("Fecha de Nacimiento: " + cliente.getFecha_nacimiento());
-			detalleCliente.append("</span>");
-			detalleCliente.append("<br>");
-			detalleCliente.append("<span>");
-			detalleCliente.append("DU: " + cliente.getDni());
-			detalleCliente.append("</span>");
-			detalleCliente.append("<br>");
-			detalleCliente.append("<span>");
-			detalleCliente.append("Domicilio: " + cliente.getDireccion());
-			detalleCliente.append("</span>");
-			detalleCliente.append("<br>");
-			detalleCliente.append("<span>");
-			detalleCliente.append("EMAIL: " + cliente.getEmail());
-			detalleCliente.append("</span>");
-			detalleCliente.append("<br>");
-			detalleCliente.append("<span>");
-			detalleCliente.append("Telefono: " + cliente.getTelefono());
-			detalleCliente.append("</span>");
-			detalleCliente.append("<br>");
+			detalleCliente.append("<table class='table table-striped'><tr><td>");
+			detalleCliente.append("Nombre</td><td>" + cliente.getNombre());
+			detalleCliente.append("</td></tr>");
+
+			detalleCliente.append("<tr><td>");
+			detalleCliente.append("Apellido</td><td>" + cliente.getApellido());
+			detalleCliente.append("</td></tr>");
+
+			detalleCliente.append("<tr><td>");
+			detalleCliente.append("Fecha de Nacimiento</td><td>" + cliente.getFecha_nacimiento());
+			detalleCliente.append("</td></tr>");
+
+			detalleCliente.append("<tr><td>");
+			detalleCliente.append("DNI</td><td>" + cliente.getDni());
+			detalleCliente.append("</td></tr>");
+
+			detalleCliente.append("<tr><td>");
+			detalleCliente.append("Domicilio</td><td>" + cliente.getDireccion());
+			detalleCliente.append("</td></tr>");
+
+			detalleCliente.append("<tr><td>");
+			detalleCliente.append("EMAIL</td><td>" + cliente.getEmail());
+			detalleCliente.append("</td></tr>");
+
+			detalleCliente.append("<tr><td>");
+			detalleCliente.append("Telefono</td><td>" + cliente.getTelefono());
+			detalleCliente.append("</td></tr>");
+			detalleCliente.append("</table>");
 			detalleCliente.append("<button class=\"btn btn-primary\" type=\"button\" id=\"agregar\">Agregar</button>");
 			
 			

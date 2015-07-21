@@ -40,31 +40,32 @@ public class GetVuelo extends HttpServlet {
 			Vuelo vuelo = vueloRepository.GetByIdBase(idVuelo);
 			StringBuilder detallePaquete = new StringBuilder();
 
-			detallePaquete.append("<p><b>Vuelo seleccionado</b></p>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Desde: " + vuelo.getDesde().getDescripcion());
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Hacia: " + vuelo.getHacia().getDescripcion());
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Horario de Partida: " + formatoFecha.format(vuelo.getPartida()));
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Horario de Llegada: " + formatoFecha.format(vuelo.getLlegada()));
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Precio: " + vuelo.getPrecio());
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
-			detallePaquete.append("<span>");
-			detallePaquete.append("Disponibilidad: "+ vuelo.getDisponibilidad());
-			detallePaquete.append("</span>");
-			detallePaquete.append("<br>");
+			detallePaquete.append("<p><b>Vuelo seleccionado</b></p><table class='table table-striped'>");
+			
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Desde </td><td>" + vuelo.getDesde().getDescripcion());
+			detallePaquete.append("</td></tr>");
+
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Hacia</td><td>" + vuelo.getHacia().getDescripcion());
+			detallePaquete.append("</td></tr>");
+			
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Horario de Partida</td><td>" + formatoFecha.format(vuelo.getPartida()));
+			detallePaquete.append("</td></tr>");
+			
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Horario de Llegada</td><td>" + formatoFecha.format(vuelo.getLlegada()));
+			detallePaquete.append("</td></tr>");
+
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Precio</td><td>" + vuelo.getPrecio());
+			detallePaquete.append("</td></tr>");
+
+			detallePaquete.append("<tr><td>");
+			detallePaquete.append("Disponibilidad</td><td>"+ vuelo.getDisponibilidad());
+			detallePaquete.append("</td></tr>");
+			detallePaquete.append("</table>");
 			detallePaquete.append("<button class=\"btn btn-primary\" type=\"button\" id=\"eliminarVuelo\">Eliminar vuelo</button>");
 
 			response.setContentType("text/html");
